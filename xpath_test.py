@@ -1,4 +1,6 @@
 from lxml import etree
+from datetime import datetime
+import isodate
 import logging
 
 # Documentation: https://docs.python.org/3/library/xml.etree.elementtree.html#xpath-support
@@ -31,8 +33,18 @@ test_rule = {
     'type': "xpath",
     'rule': "gmd:identificationInfo[1]/*/gmd:citation/*/gmd:date[./*/gmd:dateType/*/text()='publication']/*/gmd:date",
     'value': "text"
+  },
+  'evaluationCriteria': {
+    'type': 'date-not-older-than',
+    'duration': 'P6M'
   }
 }
+
+# This context defines values from the current contaxt that rule evaluation criteria might be evaluated against
+test_context = {
+  'now': datetime.now()
+}
+
 
 # This function executes xpath extraction rules
 def execute_xpath_rule(rule, model):
@@ -63,9 +75,29 @@ def execute_xpath_rule(rule, model):
     if value_method == 'text':
         result = extract_all_text(result)
     else:
-        logging.error(f'Unknown value extraction method ({value_method}) in rule')
+        logging.error(f'Unknown value extraction method ({value_method}) in extractionRule')
 
     return result
 
+def evaluate_results(eval_criteria, result, context):
+    value = (None, "??")
+    if eval_criteria['type'] == 'date-not-older-than':
+        # result is expected to be in ISO format
+        result_as_date = datetime.fromisoformat(result)
+
+        duration = isodate.parse_duration(eval_criteria['duration'])
+        reference = context['now'] - duration
+        if result_as_date < reference:
+            value = (0, f"date {result} older than {eval_criteria['duration']}")
+        else:
+            value = (1, f"date {result} not older than {eval_criteria['duration']}")
+    else:
+        value = (None, f"unknown evaluation method {eval_criteria['type']}")
+
+    return value
+
 x = execute_xpath_rule(test_rule['extractionRule'], test_model)
-print(x)
+print(f"value extracted via extraction rule: {x}")
+
+z = evaluate_results(test_rule['evaluationCriteria'], x, test_context)
+print(f"evaluation result: {z}")
