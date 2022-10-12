@@ -1,11 +1,11 @@
-import xml.etree.ElementTree as ET
+from lxml import etree
+import logging
 
 # Documentation: https://docs.python.org/3/library/xml.etree.elementtree.html#xpath-support
 
 # https://inspire.ec.europa.eu/reports/ImplementingRules/metadata/MD_IR_and_ISO_20081219.pdf
 
 ns = {
-    '':       'http://www.isotc211.org/2005/gmd',
     'csw':    'http://www.opengis.net/cat/csw/2.0.2',
     'gmd':    'http://www.isotc211.org/2005/gmd',
     'gco':    'http://www.isotc211.org/2005/gco',
@@ -16,22 +16,56 @@ ns = {
     'geonet': 'http://www.fao.org/geonetwork'
 }
 
-tree = ET.parse('example-metadata/Dataset MD Bui-ES-5.xml')
+tree = etree.parse('example-metadata/Dataset MD Bui-ES-5.xml')
 root = tree.getroot()
 
-metadataRoot = root.find('.//MD_Metadata', ns)
-print(metadataRoot)
+# Produced from service list item
+test_model = {
+  'dataset-metadata': root.xpath('//gmd:MD_Metadata', namespaces=ns)[0]
+}
 
-#print(root)
-#result = root.findall('.//MD_Metadata//date', ns)
-#print(result)
+# This is the metric/dimension/etc from the configuration 
+test_rule = {
+  'extractionRule': {
+    'source': "dataset-metadata",
+    'type': "xpath",
+    'rule': "gmd:identificationInfo[1]/*/gmd:citation/*/gmd:date[./*/gmd:dateType/*/text()='publication']/*/gmd:date",
+    'value': "text"
+  }
+}
 
-publication = metadataRoot.findall(
- #   "identificationInfo[1]/*/citation/*/date[./*/dateType/*/text()='revision']/*/date"
-   "identificationInfo/*/citation/*/date/[CI_Date/foo='2015-12-15']"
-, ns)
+# This function executes xpath extraction rules
+def execute_xpath_rule(rule, model):
+    def extract_all_text(node_or_nodes, delimiter=' '):
+        """extracts all non-whitespace text from an etree node or list of etree nodes"""
+        def flatten(list_of_lists):
+            return [item for sublist in list_of_lists for item in sublist]
 
-## TODO: figure out a better library for this to work
-## * It needs to work with the type of xpath queries that are in the INSPIRE document
+        if isinstance(node_or_nodes, list):
+            nodes = node_or_nodes
+        else:
+            nodes = [node_or_nodes]
 
-print(publication)
+        tmp = [
+          filter(lambda str : str != '',
+            map(lambda str : str.strip(), node.xpath(".//text()"))
+          ) for node in nodes]
+
+        return delimiter.join(flatten(tmp))
+
+    source = model[rule['source']]
+    xpath_rule = rule['rule']
+    value_method = rule['value']
+
+
+    result = source.xpath(xpath_rule, namespaces=ns)
+
+    if value_method == 'text':
+        result = extract_all_text(result)
+    else:
+        logging.error(f'Unknown value extraction method ({value_method}) in rule')
+
+    return result
+
+x = execute_xpath_rule(test_rule['extractionRule'], test_model)
+print(x)
