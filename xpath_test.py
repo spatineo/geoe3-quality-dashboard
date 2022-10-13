@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.rules import execute_rule
+from src.extract import extract_rule
 from src.evaluate import evaluate_results
 from src.loader import load_dataset_metadata
 
@@ -49,7 +49,7 @@ test_context = {
 # data:              result              value
 
 
-result = execute_rule(test_rule['extractionRule'], test_model)
+result = extract_rule(test_rule['extractionRule'], test_model)
 print(f"value extracted via extraction rule: {result}")
 
 value = evaluate_results(test_rule['evaluationCriteria'], result, test_context)

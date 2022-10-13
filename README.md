@@ -46,10 +46,19 @@ Source 4 data will be downloaded from an API that Spatineo will provide. Details
 
 `source` = one of `dataset-metadata`, `service-metadata`, `quality-evaluation`, `service-description` (e.g. WFS Capabilities document), or `service-availability`
 
+## Adding extractors / evaluators
 
-## TODO / Spatineo
+When you need a new type of extractor:
+1. Choose a keyword for it (for example "***xpath***")
+2. Write a function in `src/extract.py` that follows the format `def execute_[your_chosen_keyword_with_underscores]_rule(rule, model):`
+3. Register the keyword in the dict `extractor_by_type` in `src/extract.py`
+4. Write tests for that extractor in a new file `test/test_extractor_[your_chosen_keyword_with_underscores].py`
 
-* Better XPath library that is compatible with the INSPIRE TG queries
-* Testing structure
+Similar thing with evaluators, choose a keyword, write the function in `src/evaluate.py` and write tests in a new file.
 
+## Testing
+
+To run tests:
+
+`$ pytest`
 

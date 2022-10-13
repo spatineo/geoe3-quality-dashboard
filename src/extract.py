@@ -38,7 +38,7 @@ extractor_by_type = {
     'xpath': execute_xpath_rule
 }
 
-def execute_rule(rule, model):
+def extract_rule(rule, model):
     extractor = extractor_by_type[rule['type']]
     if extractor is None:
         raise f"Unknown rule extractor type {rule['type']}"
