@@ -1,22 +1,16 @@
-from lxml import etree
 from datetime import datetime
 
-from src.xml import ns
 from src.rules import execute_rule
 from src.evaluate import evaluate_results
-
+from src.loader import load_dataset_metadata
 
 # Documentation: https://docs.python.org/3/library/xml.etree.elementtree.html#xpath-support
-
 # https://inspire.ec.europa.eu/reports/ImplementingRules/metadata/MD_IR_and_ISO_20081219.pdf
 
-tree = etree.parse('example-metadata/Dataset MD Bui-ES-5.xml')
-root = tree.getroot()
 
-# Produced from service list item
-
+# Produced for each service list row
 test_model = {
-  'dataset-metadata': root.xpath('//gmd:MD_Metadata', namespaces=ns)[0],
+  'dataset-metadata': load_dataset_metadata('example-metadata/Dataset MD Bui-ES-5.xml'),
   'service-metadata': None,
   'quality-evaluation': None,
   'availability-data': None
