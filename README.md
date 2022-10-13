@@ -47,3 +47,9 @@ Source 4 data will be downloaded from an API that Spatineo will provide. Details
 `source` = one of `dataset-metadata`, `service-metadata`, `quality-evaluation`, `service-description` (e.g. WFS Capabilities document), or `service-availability`
 
 
+## TODO / Spatineo
+
+* Better XPath library that is compatible with the INSPIRE TG queries
+* Testing structure
+
+
