@@ -22,6 +22,7 @@ def test__date_not_older_than__positive():
     (value, explanation) = evaluate_results(test_rule['evaluationCriteria'], result, test_context)
 
     assert value == 1
+    assert explanation == 'date 2015-12-15 not older than P6M'
 
 
 def test__date_not_older_than__negative():
