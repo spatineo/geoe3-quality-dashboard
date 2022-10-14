@@ -1,3 +1,5 @@
+"""This is a test utility script that can be used to manually perform trials"""
+
 from datetime import datetime
 
 from src.extract import extract_rule

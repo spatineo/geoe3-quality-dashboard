@@ -1,8 +1,8 @@
-import pytest
-from datetime import datetime
-from src.xml import ns
-from src.evaluate import evaluate_results
+"""Unit tests for date-not-older-than evaluators"""
 
+from datetime import datetime
+
+from ..evaluate import evaluate_results
 
 def test__date_not_older_than__positive():
     """2015-12-15 should be within 6 months of 2016-01-01"""

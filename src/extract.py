@@ -1,5 +1,8 @@
-from src.xml import ns
+"""Function to extract reslults from the model"""
+
 import logging
+
+from .xml import ns
 
 # This function executes xpath extraction rules
 def execute_xpath_rule(rule, model):

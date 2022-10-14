@@ -1,9 +1,10 @@
-import pytest
-from src.xml import ns
-from src.extract import extract_rule
-from src.loader import load_dataset_metadata
+"""Unit tests for xpath extractor"""
 
-def test__extract_publication_date():
+from ..extract import extract_rule
+from ..loader import load_dataset_metadata
+
+def test__extract_publication_date__text():
+    """Test that this xpath extractor with value function ***text*** works"""
     test_model = {
         'dataset-metadata': load_dataset_metadata('example-metadata/Dataset MD Bui-ES-5.xml')
     }

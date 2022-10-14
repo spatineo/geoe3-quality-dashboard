@@ -1,3 +1,5 @@
+"""This file contains constants used for XML parsing"""
+
 
 ns = {
     'csw':    'http://www.opengis.net/cat/csw/2.0.2',

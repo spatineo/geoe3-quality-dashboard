@@ -1,3 +1,5 @@
+"""Evaluation functions that are used to evaluate results extracted from the model"""
+
 from datetime import datetime
 import isodate
 
