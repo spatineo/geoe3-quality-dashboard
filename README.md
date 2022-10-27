@@ -71,8 +71,9 @@ When using miniconda for the first time, run these commands
 ```
 $ conda create --name geoe3
 $ conda activate geoe3
+$ conda config --add chanels conda-forge
 $ cd c:\whereever\this\project\is\geoe3-quality-dashboard\
-$ conda install pytest lxml isodate
+$ conda install pytest lxml isodate==0.6.1
 ```
 
 
