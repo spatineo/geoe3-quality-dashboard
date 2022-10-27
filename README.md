@@ -1,9 +1,6 @@
 # geoe3-quality-dashboard
 GeoE3 quality dashboard - method for scoring services using metadata and monitoring information. You can read more about the project at https://geoe3.eu/ and https://geoe3platform.eu/geoe3/
 
-
-
-
 ## Source of the dashboard data
 
 1. Dataset metadata (data provider)
@@ -61,4 +58,21 @@ Similar thing with evaluators, choose a keyword, write the function in `src/eval
 To run tests:
 
 `$ pytest`
+
+## Miniconda3 help
+
+1. Start "Anaconda Powershell Prompt (Miniconda3)" from the start menu
+2. In the shell, run `conda activate geoe3`
+3. In the shell, run `cd c:\whereever\this\project\is\geoe3-quality-dashboard\`
+4. Use the project as normal
+
+When using miniconda for the first time, run these commands
+
+```
+$ conda create --name geoe3
+$ conda activate geoe3
+$ cd c:\whereever\this\project\is\geoe3-quality-dashboard\
+$ conda install pytest lxml isodate
+```
+
 
