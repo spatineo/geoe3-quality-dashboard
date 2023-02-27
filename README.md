@@ -21,17 +21,17 @@ Spatineo Directory: `https://directory.spatineo.com/service/164572/`
 3. Quality evaluation results (part of the GeoE3 project)
 4. Service availability information (Spatineo)
 
-Sources 1 and 2 are XML files that can be downloaded from wherever catalogues they reside from
+Sources 1 and 2 are XML files that can be downloaded from wherever catalogues they reside from.
 
-Source 3 is still undecided how to retrieve the information. The Quality software is based on FME and the workbench which analyses the actual contenst of the dataset. It could produce a machine readable file that the dashboard could read in. Currently it produces CSV files but it is unclear how those can be integrated into the process. Needs work.
+Source 3 data is provided by a Quality Software. The Quality software is based on FME and the workbench which analyses the actual contenst of the dataset. It could produce a machine readable file that the dashboard could read in. Currently, for each dataset, we are interested in the produced CSV result file that puts together the list and count of errors the software has identified. The products of the software should be downloaded from 'somewhere' - still undetermined where the software would run from and where the data would be stored.
 
-Source 4 data will be downloaded from an API that Spatineo will provide. Details are still to be decided.
+Source 4 data is downloaded from an API provided by Spatineo.
 
 ## The evaluation process
 
 1. Start with a list of datasets, the each dataset includes the following information:
     - link to dataset metadata
-    - link to servie metadata for a (single) service that is used to disseminate the dataset
+    - link to service metadata for a (single) service that is used to disseminate the dataset
     - linkage to the Quality evaluation results (TBD)
     - linkage to the service availability information (TBD)
 2. Configuration file that includes viewpoints, their dimensions, all the way up to metrics. Each metric includes extraction rules on how to extract information to evaluate that metric for a particular dataset

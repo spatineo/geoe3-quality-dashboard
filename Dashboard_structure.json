@@ -1,0 +1,1731 @@
+{
+"UseCase": {
+    "type": "viewpoint",
+    "name": "useCase"
+},
+"ServiceAndDataset": {
+    "type": "viewpoint",
+    "name": "serviceAndDataset",
+    "nodes": {
+        "serviceQuality":{
+            "type": "dimension",
+            "name": "serviceQuality",
+            "weight": 6,
+            "nodes": {
+                "serviceRobustness": {
+                    "type": "qualityElement",
+                    "name": "serviceRobustness",
+                    "weight": 5,
+                    "nodes": {
+                        "availability": {
+                            "type": "measure",
+                            "name": "availability",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "daysOfAvailabilityMetrics",
+                                    "weight": 0,
+                                    "description": "For how many days availability statistics and interruptions are calculated",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//daysOfAvailabilityMetrics",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "descritpiton": "Checks presence"
+                                    }
+                                }, 
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "daysOfResponseTimeMetrics",
+                                    "weight": 0,
+                                    "descritpiton": "For how many days response time metrics are calculated",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//daysOfResponseTimeMetrics",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "descritpiton": "Checks presence"
+                                    }
+                                },
+                                "metric0": {
+                                    "type": "metric",
+                                    "name": "serviceId",
+                                    "weight": 0,
+                                    "descritpiton": "Service ID",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//serviceId",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule":{
+                                        "type": "presence",
+                                        "descritpiton": "Checks presence"
+                                    }
+                                },
+                                "metric3": {
+                                    "type": "metric",
+                                    "name": "availability_ok_ms",
+                                    "weight": 1,
+                                    "description": "Contains the number of milliseconds the service has been in 'ok' state during the period",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//availability//total//ok",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of measure"
+                                    }
+                                },
+                                "metric4": {
+                                    "type": "metric",
+                                    "name": "availability_down_ms",
+                                    "weight": 1,
+                                    "description": "Contains the number of milliseconds the service has been in 'ok' state during the period",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//availability//total//down",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of measure"
+                                    }
+                                },
+                                "metric5": {
+                                    "type": "metric",
+                                    "name": "availability_maintenance_ms",
+                                    "weight": 1,
+                                    "description": "Contains the number of milliseconds the service has been in 'ok' state during the period",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//availability//total//maintenance",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of measure"
+                                    }
+                                },
+                                "metric6": {
+                                    "type": "metric",
+                                    "name": "availability",
+                                    "weight": 8,
+                                    "description": "Contains the number of milliseconds the service has been in available (meaning ok or in maintenance state) during the period",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "(//services//availability//total//ok + //services//availability//total//maintenance) div (//services//availability//total//ok + //services//availability//total//maintenance + //services//availability//total//down)",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 0.95,
+                                        "operator": ">",
+                                        "description": "We assume the service should be available state at least 95% of the time from when the statistics are calculated. Availability = (ok + maintenance) / (ok + down + maintenance)"
+                                    }
+                                },
+                                "metric7": {
+                                    "type": "metric",
+                                    "name": "interruptions_longest",
+                                    "weight": 4,
+                                    "description": "The length in milliseconds of the longest interruption during or overlapping 'daysOfAvailabilityMetrics'",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//interruptions//longest",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 86400000,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 24h. Null if no monitoring data is available for the period."
+                                    }
+                                },
+                                "metric8": {
+                                    "type": "metric",
+                                    "name": "interruptions_average",
+                                    "weight": 4,
+                                    "description": "The average length of service interruptions during or overlapping 'daysOfAvailabilityMetrics'",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//interruptions//average",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 43200000,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 12h. Null if no monitoring data is available for the period."
+                                    }
+                                },
+                                "metric9": {
+                                    "type": "metric",
+                                    "name": "responseTimeAverage",
+                                    "weight": 4,
+                                    "description": "Average response time (in milliseconds) of service during 'daysOfResponseTimeMetrics'.",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//responseTime//averageMillis",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 21600000,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 6h. Null if no monitoring data is available for the period."
+                                    }
+                                },
+                                "metric10": {
+                                    "type": "metric",
+                                    "name": "responseTimeLatestAt",
+                                    "weight": 4,
+                                    "description": "Timestamp of latest monitoring request (in milliseconds since epoch).",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//responseTime//latest//at",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of timestamp. Null if no monitoring data is available for the period."
+                                    }
+                                },
+                                "metric11": {
+                                    "type": "metric",
+                                    "name": "responseTimeLatestMillis",
+                                    "weight": 4,
+                                    "description": "Response time (in milliseconds) of the latest monitoring request.",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//responseTime//latest//millis",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 0,
+                                        "maximum": 3600000,
+                                        "description": "We assume it should be at most 1h. Null if no monitoring data is available for the period."
+                                    }
+                                },
+                                "metric12": {
+                                    "type": "metric",
+                                    "name": "serviceInfoUrl",
+                                    "weight": 0,
+                                    "description": "URL of the service endpoint in question",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//serviceInfo//url",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of URL."
+                                    }
+                                },
+                                "metric13": {
+                                    "type": "metric",
+                                    "name": "serviceInfoType",
+                                    "weight": 0,
+                                    "description": "Type of service (WMS, WFS, WMTS, ArcGIS, REST, or INSPIRE_ATOM)",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//serviceInfo//type",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of type of service."
+                                    }
+                                },
+                                "metric14": {
+                                    "type": "metric",
+                                    "name": "serviceInfoVersion",
+                                    "weight": 0,
+                                    "description": "Version of service endpoint (newest supported version in case of OGC services",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "service-availability",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "rule": "//services//serviceInfo//version",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of version."
+                                    }
+                                }                                
+                            }
+                        }
+                    }
+                }
+            }
+        }, 
+        "completeness": {
+            "type": "dimension",
+            "name": "Completeness",
+            "weight": 5,
+            "nodes": {
+                "omission": {
+                    "type": "qualityElement",
+                    "name": "Omission",
+                    "weight": 5,
+                    "nodes": {
+                        "missingItem" : {
+                            "type": "measure",
+                            "name": "missingItem",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "itemMissing",
+                                    "weight": 5,
+                                    "description": "Indication of omission",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Omission//gmd:itemMissing",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                            "type": "presence",
+                                            "description": "Checks indication of omission"
+                                    }
+                                }, 
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "itemMissingCount",
+                                    "weight": 1,
+                                    "description": "Number of missing item",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Omission//gmd:count",
+                                        "value": "text"
+                                        
+                                    },
+                                    "evaluationRule": {
+                                            "type": "comparison",
+                                            "referenceValue": 1000,
+                                            "operator": "<",
+                                            "description": "We assume it should be at most 1000 (number chosen randomly, user input parameter ?)."
+                                    }
+                                },
+                                "metric3": {
+                                    "type": "metric",
+                                    "name": "itemMissingRate",
+                                    "weight": 7,
+                                    "description": "Proportion of missing item",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Omission//gmd:rate",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 15,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 15% (user input parameter ?)."
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                },
+                "commision": {
+                    "type": "qualityElement",
+                    "name": "Comission",
+                    "weight": 5,
+                    "nodes": {
+                        "itemDucplicate": {
+                            "type": "measure",
+                            "name": "itemDuplicate",
+                            "weight": 2,
+                            "nodes": {
+                                "metric1" : {
+                                    "type": "metric",
+                                    "name": "itemDuplicate",
+                                    "weight": 5,
+                                    "description": "Number of duplicate item",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Commission//gmd:itemDuplicate",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 100,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 100 (number chosen randomly, user input parameter ?)."
+                                    }
+                                }
+                            }
+                        },
+                        "itemExcess": {
+                            "type": "measure",
+                            "name": "itemExcess",
+                            "weight": 5,
+                            "nodes": {
+                            }, 
+                            "metric1": {
+                                "type": "metric",
+                                "name": "itemExcess",
+                                "weight": 5,
+                                "description": "Indication of commission",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Commission//gmd:itemExtra",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "presence",
+                                    "description":"Check presence of indication of excess item."
+                                }
+                            }, 
+                            "metric2": {
+                                "type": "metric",
+                                "name": "itemExtraCount",
+                                "weight": 1,
+                                "description": "Number of extra item",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Commission//gmd:count",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "comparison",
+                                    "referenceValue": 100,
+                                    "operator": "<",
+                                    "description": "We assume it should be at most 100 (number chosen randomly, user input parameter ?)."
+                                }
+                            }, 
+                            "metric3": {
+                                "type": "metric",
+                                "name": "itemExtraRate",
+                                "weight": 7,
+                                "description": "Proportion of extra item",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:Completeness//gmd:Commission//gmd:rate",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "comparison",
+                                    "referenceValue": 15,
+                                    "operator": "<",
+                                    "description": "We assume it should be at most 15% (user input parameter ?)."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }, 
+        "thematicQuality": {
+            "type": "dimension",
+            "name": "ThematicQuality",
+            "weight": 5,
+            "nodes": {
+                "quantitativeAttributeAccuracy": {
+                    "type": "qualityElement",
+                    "name": "QuantitativeAttributeAccuracy",
+                    "weight": 7,
+                    "nodes": {
+                        "dateLastEvalQAA": {
+                            "type": "measure",
+                            "name": "dateLastEvalQAA",
+                            "weight": 8,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "dateLastEvalQAA",
+                                    "weight": 5,
+                                    "description": "Date of last evaluation",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:QuantitativeAttributeAccuracy//gmd:date_evaluation//gco:date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "date",
+                                        "minimum": "2000-01-01" ,
+                                        "maximum": "2023-01-01",
+                                        "description": "Should be between 2000-01-01 and 2023-01-01 (defined by user)"
+                                    }
+                                }
+                            }
+                        }, 
+                        "AttributeValueUncertainty": {
+                            "type": "measure",
+                            "name": "AttributeValueUncertainty",
+                            "weight": 5,
+                            "nodes": {
+                                "AVU68": {
+                                    "type": "metric",
+                                    "name": "AVU68",
+                                    "weight": 5,
+                                    "description": "Attribute value uncertainty at 68,3 % significance level",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:QuantitativeAttributeAccuracy//gmd:AttributeValueUncertaincy//gmd:sigmaUn",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 0.5,
+                                        "operator": ">",
+                                        "description": "Half length of the interval defined by an upper and a lower limit, in which the true value for the quantitative attribute lies with probability 68,3 % ; LE68.3 (ISO19157, Table D.78)"
+                                    }
+                                },
+                                "AVU95": {
+                                    "type": "metric",
+                                    "name": "AVU95",
+                                    "weight": 5,
+                                    "description": "Attribute value uncertainty at 95 % significance level",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:QuantitativeAttributeAccuracy//gmd:AttributeValueUncertaincy//gmd:sigmaDeux ",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 0.5,
+                                        "operator": ">",
+                                        "description": "Half length of the interval defined by an upper and a lower limit, in which the true value for the quantitative attribute lies with probability 95 % ; LE95 (ISO19157, Table D.81)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "NonQuantitativeAttributeCorrectness": {
+                    "type": "qualityElement",
+                    "name": "NonQuantitativeAttributeCorrectness",
+                    "weight": 7,
+                    "nodes": {
+                        "dateLastEvalNQAC": {
+                            "type": "measure",
+                            "name": "dateLastEvalNQAC",
+                            "weight": 8,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "dateLastEvalNQAC",
+                                    "weight": 5,
+                                    "description": "Date of last evaluation",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:NonQuantitativeAttributeCorrectness//gmd:date_evaluation//gco:date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "date",
+                                        "minimum": "2000-01-01" ,
+                                        "maximum": "2023-01-01",
+                                        "description": "Should be between 2000-01-01 and 2023-01-01 (defined by user)"
+                                    }
+                                }
+                            }
+                        },
+                        "missclassNQAC": {
+                            "type": "measure",
+                            "name": "missclassNQAC",
+                            "weight": 6,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "missclassRateNQAC",
+                                    "weight": 7,
+                                    "description": "Proportion of missclassification for non-quantitative attributes",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:NonQuantitativeAttributeCorrectness//gmd:missclassification//gmd:rate",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 15,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 15% (user input parameter ?)."
+                                    }
+                                }, 
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "missclassCountNQAC",
+                                    "weight": 1,
+                                    "description": "Missclassification count for non-quantitative attributes",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:NonQuantitativeAttributeCorrectness//gmd:missclassification//gmd:count",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 100,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 100 (number chosen randomly, user input parameter ?)."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "ClassificationCorrectness": {
+                    "type": "qualityElement",
+                    "name": "ClassificationCorrectness",
+                    "weight": 7,
+                    "nodes": {
+                        "dateLastEvalThematicQuality": {
+                            "type": "measure",
+                            "name": "dateLastEvalThematicQuality",
+                            "weight": 8,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "dateLastEvalThematicQuality",
+                                    "weight": 5,
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:ClassificationCorrectness//gmd:date_evaluation//gco:date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "date",
+                                        "minimum": "2000-01-01" ,
+                                        "maximum": "2023-01-01",
+                                        "description": "Should be between 2000-01-01 and 2023-01-01 (defined by user)"
+                                    }
+                                }                             
+                            }
+                            
+                        }, 
+                        "missclassTCC":{
+                            "type": "measure",
+                            "name": "missclassTCC",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "missclassRateTCC",
+                                    "weight": 7,
+                                    "description": "Proportion of incorrectly classified item",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:ClassificationCorrectness//gmd:missclassification//gmd:rate",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 15,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 15% (user input parameter ?)."
+                                    }
+                                }, 
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "NumberIncorrectItemsTCC",
+                                    "weight": 1,
+                                    "description": "Number of item with incorrect classification",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "/gmd:MD_Metadata//gmd:dataQuality//gmd:ThematicQuality//gmd:ClassificationCorrectness//gmd:missclassification//gmd:count",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 100,
+                                        "operator": "<",
+                                        "description": "We assume it should be at most 100 (number chosen randomly, user input parameter ?)."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "logicalConsistency": {
+            "type": "dimension",
+            "name": "LogicalConsistency",
+            "weight": 5,
+            "nodes": {
+                "ConceptualConsistency": {
+                    "type": "element",
+                    "name": "ConceptualConsistency",
+                    "weight": 6,
+                    "nodes":{
+                        "FailsOGC" : {
+                            "type": "measure",
+                            "name": "FailsOGC",
+                            "weight": 7,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "FailsOGCValid",
+                                     "weight": 5,
+                                     "description": "The feature must follow OGC Valid principles.",
+                                     "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Fails OGC Valid",
+                                        "value": "text"                                       
+                                     },
+                                     "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 1000,
+                                        "description": "The feature do not follow OGC Valid principles. Checks count of such errors."
+                                     }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "FailsOGCSimple",
+                                    "weight": 5,
+                                     "description": "The feature must follow OGC Simple principles.",
+                                    "extractionRule": {
+                                       "type": "formula",
+                                       "source": "quality-evaluation",
+                                       "column": "error_count",
+                                       "rule": "Fails OGC Simple",
+                                       "value": "text"                                       
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 1000,
+                                        "description": "The feature do not follow OGC Simple principles. Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "MissingVertexNormals" : {
+                            "type": "measure",
+                            "name": "MissingVertexNormals",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "MissingVertexNormals",
+                                     "weight": 5,
+                                     "description": "The feature must have a vertex normals.",
+                                     "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Missing Vertex Normals",
+                                        "value": "text"                                       
+                                     },
+                                     "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The feature has no vertex normals. Checks count of such errors."
+                                     }
+                                }
+                            }
+                        },
+                        "SurfacesWronglyOriented" : {
+                            "type": "measure",
+                            "name": "SurfacesWronglyOriented",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "SurfacesWronglyOriented",
+                                     "weight": 5,
+                                     "description": "All normals of the faces must be logically oriented.",
+                                     "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "SurfacesWronglyOriented",
+                                        "value": "text"                                       
+                                     },
+                                     "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Is the every surface of the feature logically oriented based on vertex normals and depending on the feature type? Checks count of such errors."
+                                     }
+                                }
+                            }
+                        }
+                    }
+                },
+                "DomainConsistency": {
+                    "type": "element",
+                    "name": "DomainConsistency",
+                    "weight": 5,
+                    "nodes":{
+                        "AttributeValueNotInAllowedRange": {
+                            "type": "measure",
+                            "name": "AttributeValueNotInAllowedRange",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "AttributeValueNotInAllowedRange_TrueFalse",
+                                    "weight": 5,
+                                    "description": "The value of the attribute XXX must be in the allowed range (A-N). Allowed ranges were derived from OGC CityGML Encoding Standard.",
+                                    "extractionRule": {
+                                       "type": "formula",
+                                       "source": "quality-evaluation",
+                                       "column": "error_count",
+                                       "rule": "ValueNotInAllowedRange",
+                                       "value": "text"                                       
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 10,
+                                        "description": "At least X attribute(s) is/are not in allowed range. Checks count of such errors."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "FormatConsistency": {
+                    "type": "element",
+                    "name": "FormatConsistency",
+                    "weight": 8,
+                    "nodes":{
+                        "MismatchedDimensions": {
+                            "type": "measure",
+                            "name": "MismatchedDimensions",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "MismatchedDimensions",
+                                    "weight": 5,
+                                    "description": "Geometries must be either 2D or 3D, not both.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Mismatched Dimensions",
+                                        "value": "text"                                         
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 1,
+                                        "description": "Does the feature have a mixture of 2D and 3D parts? Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "Not3D": {
+                            "type": "measure",
+                            "name": "Not3D",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "Not3D",
+                                    "weight": 5,
+                                    "description": "The coordinate reference system must be 3D.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Not3D",
+                                        "value": "text"                                         
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 1,
+                                        "description": "Is the coordinate reference system 3D? Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "WrongDataType": {
+                            "type": "measure",
+                            "name": "WrongDataType",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "WrongDataType",
+                                    "weight": 5,
+                                    "description": "Data type of attribute information XXX must be valid.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "WrongDataType",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 5,
+                                        "description": "At least X attribute(s) has/have a wrong data type. Checks count of such errors."
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                },
+                "GeometricConsistency": {
+                    "type": "element",
+                    "name": "GeometricConsistency",
+                    "weight": 5,
+                    "nodes":{
+                        "GroundOverlappingIn2D": {
+                            "type": "measure",
+                            "name": "GroundOverlappingIn2D",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "GroundOverlappingIn2D",
+                                    "weight": 5,
+                                    "description": "Overlapping area of two features must be smaller than 5 % of their areas. ",
+                                     "extractionRule": {
+                                         "type": "formula",
+                                         "source": "quality-evaluation",
+                                         "column": "error_count",
+                                         "rule": "GroundOverlappingIn2D",
+                                         "value": "text"                                        
+                                     },
+                                     "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Is the GroundSurface overlapping with the GroundSurface of another Building? ? Checks count of such errors."
+                                     }
+                                }
+                            }
+                        },
+                        "DegenerateCorruptGeometries": {
+                            "type": "measure",
+                            "name": "DegenerateCorruptGeometries",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "DegenerateCorruptGeometries",
+                                    "weight": 5,
+                                    "description": "The geometry must be valid.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Degenerate or Corrupt Geometries",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Does the geometry contain degenerated or corrupted geometries? Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "NonPlanarSurfaces": {
+                            "type": "measure",
+                            "name": "NonPlanarSurfaces",
+                            "weight": 5,
+                            "description": "The face or BoundarySurface must be planar.",
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "NonPlanarSurfaces",
+                                    "weight": 5,
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Non-Planar Surfaces",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Is the Face or BoundarySurface planar based on thickness or normal deviation? Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "GroundHigherThanRoof": {
+                            "type": "measure",
+                            "name": "GroundHigherThanRoof",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "MinGroundHigherThanMinRoof",
+                                    "weight": 5,
+                                    "description": "The minimum height of the roof cannot be smaller than minimum height of the ground.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "MinGroundHigherThanMinRoof",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Checks count of such errors."
+                                    }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "MaxGroundHigherThanMaxRoof",
+                                    "weight": 5,
+                                    "description": "The maximum height of the floor cannot be smaller than maximum height of the roof.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "MaxGroundHigherThanMaxRoof",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Checks count of such errors."
+                                    }
+                                }
+                            }
+                        },
+                        "FeatureHasSpikes": {
+                            "type": "measure",
+                            "name": "FeatureHasSpikes",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "FeatureHasSpikes",
+                                    "weight": 5,
+                                    "description": "The feature contains spikes, which angle or length exceeds the given tolerance.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "FeatureHasSpikes",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The feature cannot contain spikes less than X degrees and/or Y meters (user ?)."
+                                    }
+                                }
+                            }
+                        },
+                        "GeometryTooSmall": {
+                            "type": "measure",
+                            "name": "GeometryTooSmall",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "AreaTooSmall",
+                                    "weight": 5,
+                                    "description": "The area of the face must be at least X m².",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "AreaTooSmall",
+                                        "value": "text"                                         
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": ">",
+                                        "referenceValue": 50,
+                                        "description": "The area of the face must be at least X m² (user request? / user parameter in FME)"
+                                    }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "TooSmallVolume",
+                                    "weight": 5,
+                                    "description": "The volume of the solid cannot be smaller than X m3.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "TooSmallVolume",
+                                        "value": "text"                                        
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": ">",
+                                        "referenceValue": 50,
+                                        "description": "The volume of the solid must be greater than X m3. (user request? / user parameter in FME)"
+                                }
+                                }
+                            }
+                        },
+                        "Orientation": {
+                            "type": "measure",
+                            "name": "Orientation",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "Incorrect Surface Orientation",
+                                    "weight": 5,
+                                    "description": "The surface must have a valid orientation.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Incorrect Surface Orientation",
+                                        "value": "text"                                            
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The surfaces cannot have an incorrect orientation."
+                                    }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "Incorrect Solid Orientation",
+                                    "weight": 5,
+                                    "description": "The solid must have a valid orientation.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Incorrect Solid Orientation",
+                                        "value": "text"                                            
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The solids cannot have an incorrect orientation."
+                                    }
+                                },
+                                "metric3": {
+                                    "type": "metric",
+                                    "name": "Incorrect Area Orientation",
+                                    "weight": 5,
+                                    "description": "The areas must have a valid orientation.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Incorrect Orientation",
+                                        "value": "text"                                             
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "Do Areas, such as polygons, ellipses, and donuts, have an correct orientation? The area cannot have an incorrect orientation."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TopologicalConsistency": {
+                    "type": "element",
+                    "name": "TopologicalConsistency",
+                    "weight": 5,
+                    "nodes":{
+                        "MissingConnections": {
+                            "type": "measure",
+                            "name": "MissingConnections",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "CountMC",
+                                     "weight": 5,
+                                     "description": "The feature must be self-closure based on its starting and ending points.",
+                                     "extractionRule": {
+                                         "type": "formula",
+                                         "source": "quality-evaluation",
+                                         "column": "error_count",
+                                         "rule": "EndtoStartPoint",
+                                         "value": "text"                                        
+                                     },
+                                     "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The feature is not self-closure."
+                                     }
+                                    
+                                }
+                            }
+                        },
+                        "InvalidSolidVoids": {
+                            "type": "measure",
+                            "name": "InvalidSolidVoids",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "CountISV",
+                                    "weight": 5,
+                                    "description": "The solid must be valid.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "InvalidSolidVoids",
+                                        "value": "text"                                       
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The solid cannot contain problems."
+                                    }
+                                }
+                            }
+                        },
+                        "InvalidSelfInterestOverlapErrors": {
+                            "type": "measure",
+                            "name": "InvalidSelfInterestOverlapErrors",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "CountISISO",
+                                    "weight": 5,
+                                    "description": "The vertices of the feature must be correctly connected",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Self-Intersections in 2D",
+                                        "value": "text"                                       
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50000,
+                                        "description": "The feature cannot intersect itself."
+                                    }
+                                }
+                            }
+                        },
+                        "InvalidSolidBoundaries": {
+                            "type": "measure",
+                            "name": "InvalidSolidBoundaries",
+                            "weight": 5,
+                            "nodes":{
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "CountISB",
+                                    "weight": 5,
+                                    "description": "The solid boundaries must be valid.",
+                                    "extractionRule": {
+                                        "type": "formula",
+                                        "source": "quality-evaluation",
+                                        "column": "error_count",
+                                        "rule": "Invalid Solid Boundaries",
+                                        "value": "text"                                           
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "operator": "<",
+                                        "referenceValue": 50,
+                                        "description": "The solid boundaries cannot be invalid."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "temporalQuality": {
+            "type": "dimension",
+            "name": "TemporalQuality",
+            "weight": 7,
+            "nodes": {
+                "AccuracyTimeMeasurment": {
+                    "type": "qualityElement",
+                    "name": "AccuracyTimeMeasurment",
+                    "weight": 5,
+                    "nodes": {
+                        "TimeAccuracy": {
+                            "type": "measure",
+                            "name": "TimeAccuracy",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "TimeAccuracyLE90",
+                                    "weight": 5,
+                                    "description": "Time accuracy at 90 % significance level",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:TemporalQuality//gmd:AccuracyTimeMeasurment//gmd:TimeAccuracy//gmd:TimeAccuracyLE90",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "comparison",
+                                        "referenceValue": 0.5,
+                                        "operator": ">",
+                                        "description": "Half length of the interval defined by an upper and a lower limit, in which the true value for the time instance lies with probability 90 %; LE90 (ISO19157, Table D.63)"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                },
+                "TemporalConsistency": {
+                    "type": "qualityElement",
+                    "name": "TemporalConsistency",
+                    "weight": 5,
+                    "nodes": {
+                        "ChronologicalOrder": {
+                            "type": "measure",
+                            "name": "ChronologicalOrder",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "TimeAccuracyLE99.8",
+                                    "weight": 5,
+                                    "description": "Time accuracy at 99,8 % significance level",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:TemporalConsistency//gmd:ChronologicalOrder//gmd:TimeAccuracyLE99.8",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "comparison",
+                                        "referenceValue": 0.5,
+                                        "operator": ">",
+                                        "description": "Half length of the interval defined by an upper and a lower limit, in which the true value for the time instance lies with probability 99.8 %; LE99.8 (ISO19157, Table D.67)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TemporalValidity": {
+                    "type": "qualityElement",
+                    "name": "TemporalValidity",
+                    "weight": 9,
+                    "nodes": {
+                        "Currentness": {
+                            "type": "measure",
+                            "name": "Currentness",
+                            "weight": 8,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "DateOfCreation",
+                                    "weight": 5,
+                                    "description": "Date of creation",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo[1]//gmd:citation//gmd:CI_Date[gmd:dateType/gmd:CI_DateTypeCode/@codeListValue='creation']/gmd:date/gco:Date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "date",
+                                        "minimum": "2015-01-01",
+                                        "maximum": "2023-01-01",
+                                        "description": "Date of creation should be included in user requested period"
+                                    }
+
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "DateOfPublication",
+                                    "weight": 5,
+                                    "description": "Date of publication",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo[1]//gmd:citation//gmd:CI_Date[gmd:dateType/gmd:CI_DateTypeCode/@codeListValue='publication']/gmd:date/gco:Date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "date",
+                                        "minimum": "2016-01-01",
+                                        "maximum": "2023-01-01",
+                                        "description": "Date of publication should be included in user requested period"
+                                    }
+                                },
+                                "metric3": {
+                                    "type": "metric",
+                                    "name": "DateOfRevision",
+                                    "weight": 5,
+                                    "description": "Date of revision declared in the Metadata",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo[1]//gmd:citation//gmd:CI_Date[gmd:dateType/gmd:CI_DateTypeCode/@codeListValue='revision']/gmd:date/gco:Date",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "date",
+                                        "minimum": "2022-01-01",
+                                        "maximum": "2023-01-01",
+                                        "description": "Date of last revision should be included in user requested period"
+                                    }
+                                }
+                            }
+                        },
+                        "MaintenanceFrequency": {
+                            "type": "measure",
+                            "name": "MaintenanceFrequency",
+                            "weight": 7,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "MatchMaintenanceExpected",
+                                    "weight": 7,
+                                    "description": "Checks that the last maintenance date matches with the declared maintenance frequency.",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:MD_Metadata //gmd:identificationInfo//gmd:MD_DataIdentification//gmd:resourceMaintenance//gmd:MD_MaintenanceInformation//gmd:maintenanceAndUpdateFrequency//gmd:MD_MaintenanceFrequencyCode//@codeListValue",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "maintenance",
+                                        "rule": {
+                                            "rule_continual": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='continual']/gmd:maintenanceDate/gco:DateTime[@valueDateTime > current-dateTime() - xs:dayTimeDuration('PT24H')]",
+                                            "rule_daily": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='daily']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('PT24H')]",  
+                                            "rule_weekly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='weekly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P7D')]", 
+                                            "rule_fortnightly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='fortnightly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P14D')]", 
+                                            "rule_montly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='monthly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P31D')]", 
+                                            "rule_quaterly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='quarterly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P93D')]", 
+                                            "rule_biannualy": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='biannually']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P186D')]", 
+                                            "rule_annualy": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='annually']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P1Y')]" 
+                                            },
+                                        "description": "Returns True if declared frequency matches last maintenance date. If declared frequency is 'asNeeded','irregular','notPlanned',or 'unknown', returns nothing"
+                                    }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "MatchMaintenanceFreqRequested",
+                                    "weight": 9,
+                                    "description": "Checks that the requested maintenance frequency by the user matches the declared maintenance frequency",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:MD_Metadata //gmd:identificationInfo//gmd:MD_DataIdentification//gmd:resourceMaintenance//gmd:MD_MaintenanceInformation//gmd:maintenanceAndUpdateFrequency//gmd:MD_MaintenanceFrequencyCode/@codeListValue",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule":{
+                                        "type": "comparison",
+                                        "referenceValue": "continual",
+                                        "operator": "is",
+                                        "description": "Should return true if matches user request of maintenance requency. Should be implemented when requests on dahsboard can be personnalized."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "positionnalAccuracy": {
+            "type": "dimension",
+            "name": "PositionnalAccuracy",
+            "weight": 5,
+            "nodes": {
+                "AbsolutePositionalAccuracy": {
+                    "type": "qualityElement",
+                    "name": "AbsolutePositionalAccuracy",
+                    "weight": 8,
+                    "nodes": {
+                        "MeanValuePosUncertainties": {
+                            "type": "measure",
+                            "name": "MeanValuePosUncertainties",
+                            "weight": 8,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "MeanValuePosUncertainties",
+                                    "weight": 5,
+                                    "description": "Mean value of positionnal uncertainty of the dataset",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:PositionalAccuracy//gmd:AbsolutePositionalAccuracy//gmd:MeanValuePositionalUncertainties",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 0,
+                                        "maximum": 0.8,
+                                        "description": "Mean value of positionnal uncertainty should be between 0m and 0.8m (user request)"
+                                }
+                            }
+                        },
+                        "Lineage": {
+                            "type": "measure",
+                            "name": "Lineage",
+                            "weight": 10,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "Statement",
+                                    "weight": 5,
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:dataQualityInfo//gmd:lineage//gmd:statement ",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Check presence of lineage statement."
+                                    }
+                                }   
+                            }
+                        }
+                        }
+                    }
+                },
+                "RelativePositionalAccuracy": {
+                    "type": "qualityElement",
+                    "name": "RelativePositionalAccuracy",
+                    "weight": 8,
+                    "nodes": {
+                        "RelativeVerticalError": {
+                            "type": "measure",
+                            "name": "RelativeVerticalError",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "RelativeVerticalError",
+                                    "weight": 5,
+                                    "description": "A comparison of the data (measured) and the control (true). Calculation method of the Relative LE (Rel LE90): see ISO19157-3, Table D.59",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:PositionalAccuracy//gmd:RelativePositionalAccuracy//gmd:RelativeVerticalError",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 0,
+                                        "maximum": 0.9,
+                                        "description": "The vertical relative error should be between x and x (user request)"
+                                    }
+                                }
+                            }
+                        },
+                        "RelativeHorizontalError": {
+                            "type": "measure",
+                            "name": "RelativeHorizontalError",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "RelativeHorizontalError",
+                                    "weight": 5,
+                                    "description": "A comparison of the data (measured) and the control (true). Calculation method of the Relative LE (Rel CE90): see ISO19157-3, Table D.60",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:PositionalAccuracy//gmd:RelativePositionalAccuracy//gmd:RelativeHorizontalError",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 0,
+                                        "maximum": 0.9,
+                                        "description": "The horizontal relative error should be between x and x (user request)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "GriddedPositionalAccuracy": {
+                    "type": "qualityElement",
+                    "name": "GriddedPositionalAccuracy",
+                    "weight": 5,
+                    "nodes":{
+                        "CircularSD": {
+                            "type": "measure",
+                            "name": "CircularSD",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "CircularSD",
+                                    "weight": 5,
+                                    "description": "Radius describing a circle, in which the true point location lies with the probability of a normal distribution at 39,4 % (see ISO19157-3, Table D.49)",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:PositionalAccuracy//gmd:GriddedPositionalAccuracy//gmd:CircularSD",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 0,
+                                        "maximum": 0.9,
+                                        "description": "The circular standard deviation should be between x and x (user request)"
+
+                                    }
+                                }
+                            }
+                        },
+                        "RMSErrorPlanimetry": {
+                            "type": "measure",
+                            "name": "RMSErrorPlanimetry",
+                            "weight": 10,
+                            "description": "Root mean square error of planimetry",
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "RMSEPlanimetry",
+                                    "weight": 5,
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:PositionalAccuracy//gmd:GriddedPositionalAccuracy//gmd:RMSEPlanimetry",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": 20,
+                                        "operator": "<",
+                                        "description": "The circular standard deviation should be under 20m (user request)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "SpatialResolution": {
+                    "type": "qualityElement",
+                    "name": "SpatialResolution",
+                    "weight": 16,
+                    "nodes":{
+                        "equivalentScale": {
+                            "type": "measure",
+                            "name": "equivalentScale",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "equivalentScale",
+                                    "weight": 5,
+                                    "description": "Level of detail expressed as the scale denominator of a comparable hardcopy map or chart. Each spatialResoultion element must contain either an equivalent scale or a distance but not both",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo[1]//gmd:spatialResolution//gmd:equivalentScale//gmd:denominator",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 490,
+                                        "maximum": 510,
+                                        "description": "Map scale should be between 1/4900 and 1/5100 (user request)."
+                                    }
+                                }
+                            }
+                        },
+                        "distance": {
+                            "type": "measure",
+                            "name": "distance",
+                            "weigth": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "Distance",
+                                    "weight": 5,
+                                    "description": "Ground sample distanceEach spatialResoultion element must contain either an equivalent scale or a distance but not both",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo[1]//gmd:spatialResolution//gmd:distance",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "range",
+                                        "minimum": 15,
+                                        "maximum": 20,
+                                        "description": "Distance should be between 15-20m (user request)."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"Interoperability": {
+    "type": "viewpoint",
+    "name": "interoperability"
+}
+}
