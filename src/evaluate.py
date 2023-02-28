@@ -1,39 +1,3 @@
-"""Evaluation functions that are used to evaluate results extracted from the model
-
-from datetime import datetime
-import isodate
-
-def evaluate_date_not_older_than(eval_criteria, result, context):
-    # result is expected to be in ISO format
-    result_as_date = datetime.fromisoformat(result)
-
-    duration = isodate.parse_duration(eval_criteria['duration'])
-    reference = context['now'] - duration
-    if result_as_date < reference:
-        value = (0, f"date {result} older than {eval_criteria['duration']}")
-    else:
-        value = (1, f"date {result} not older than {eval_criteria['duration']}") 
-    
-    return value
-
-evaluator_by_type = {
-    'date-not-older-than': evaluate_date_not_older_than
-}
-
-def evaluate_results(eval_criteria, result, context):
-    evaluator = evaluator_by_type[eval_criteria['type']]
-
-    if evaluator is None:
-        raise f"unknown evaluation method {eval_criteria['type']}"
-
-    return evaluator(eval_criteria, result, context)
-
-"""
-
-
-
-
-
 '''Scoring method :
 - Scores are calculated from 0 to 5, 5 being the best.
 - 0 is reserved for an absence of value.
@@ -53,6 +17,9 @@ def evaluate_results(eval_criteria, result, context):
     - if the extracted value is less than 10% outside the range : 3/5
     - if the extracted value is less than 20% outside the range : 2/5
     - if the extracted value is more than 20% outside the range : 1/5
+
+    For aggregation of metric, measures, elements, dimensions, viewpoints :
+    - Score is calculated by weigted average of the scores of the categories that are one level down.
 
 '''
 
@@ -278,14 +245,3 @@ def evaluate_categories(df):
     df = pd.merge(df, viewpoint_scores, on=['Viewpoint'])
 
     return df
-
-''' # Print the results
-    print('Measure Scores:\n', measure_scores)
-    print('Element Scores:\n', element_scores)
-    print('Dimension Scores:\n', dimension_scores)
-    print('Viewpoint Scores:\n', viewpoint_scores)'''
-
-''' # To Excel
-    name_excel_file = datetime.now().strftime('%Y%m%d_%H%M%S') + '.xlsx'
-    grouped_mean.to_excel(name_excel_file, index=False)
-    print('Scores have been saved in an Excel file named : ', name_excel_file)'''

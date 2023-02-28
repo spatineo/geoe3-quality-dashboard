@@ -7,10 +7,9 @@ import pandas as pd
 import lxml
 from lxml import etree
 from xml_ import *
-from loader import load_API
-from loader import load_dataset_metadata
-from loader import load_cvs
-from evaluate import evaluate
+from loader import load_API, load_dataset_metadata, load_cvs
+from evaluate import evaluate, evaluate_categories
+
 
 
 
@@ -32,6 +31,7 @@ def execute_load_API(rule,serviceId):
 def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, func = None):
     result = []
     table_data = []
+    table_data_scores = []
     url_start_previous = ""
     for key1, value1 in my_dict.items():
         for key2, value2 in value1.items():
@@ -48,8 +48,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                     for key9, value9 in value8.items():
                                                         for key10, value10 in value9.items():
                                                             if key10 == "extractionRule":
-                                                                row = {                                                                                                                                 
-                                                                    "Type_Rule": value10["type"],
+                                                                row = {
                                                                     "Viewpoint": value1["name"],
                                                                     "Viewpoint_Weight": value1["weight"],
                                                                     "Dimension": value3["name"],
@@ -104,7 +103,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                         row["Score"] = evaluate(evaluationRule,value, frequency_code, '')'''
                                                                 table_data.append(row)
     result = pd.DataFrame(table_data)
-
+    scores = evaluate_categories(result)
     '''Delete the temp file created to contain the API data'''
     try:
         os.remove(api_file)
@@ -112,7 +111,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
     except OSError as error:
         print(error)
 
-    return result
+    return result, scores
 
 def extract_rule(rule, model,metadata,serviceId):
     extractor = extractor_by_type[rule['type']]

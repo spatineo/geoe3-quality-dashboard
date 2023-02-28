@@ -16,13 +16,14 @@ def main():
     # Ask for service ID of service we want the availability analysis from.
     serviceId = input("Please enter the service ID (list of service Id : 39859,164572,157386,88383,157353) :")
     # Read rules from JSON file that describes the structure of the dashboard and its rules.
-    structure_file = read_rules_from_json("C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/Dashboard_structure.json")
 
-    '''JUST FOR TESTING PHASE:'''
+    structure_file = read_rules_from_json("C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/Dashboard_structure.json")
+    
+    '''JUST FOR TESTING PHASE:
     metadata_file = 'MD_Bui_EX_1.xml'
     qualityEvaluation_file = 'C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/src/buildings_and_errors/results_NO_cc.csv'
     serviceId = '157353'
-    '''JUST FOR TESTING PHASE:'''
+    JUST FOR TESTING PHASE:'''
 
 
     # Define model object
@@ -32,15 +33,16 @@ def main():
     'quality-evaluation': load_cvs(qualityEvaluation_file)
     }
     # Extract rules from Structure file (JSON) and executes them. Result is a Dataframe table
-    extractionRule_table = extract_all_info(structure_file, metadata_file, serviceId, qualityEvaluation_file, func = extract_rule)
-
-
-
-
-    # save the DataFrame to an Excel file
-    name_excel_file = serviceId + '_' + metadata_file.replace('.xml', '') + '_' + datetime.now().strftime('%Y%m%d_%H%M%S') + '.xlsx'
-    extractionRule_table.to_excel(name_excel_file, index=False)
+    extractionRule_table, scores_table = extract_all_info(structure_file, metadata_file, serviceId, qualityEvaluation_file, func = extract_rule)
+    
+    # Save the DataFrames to an csv file  
+    name_excel_file = serviceId + '_' + metadata_file.replace('.xml', '') + '_' + datetime.now().strftime('%Y%m%d_%H%M%S') + '.csv'
+    scores_table.to_csv(name_excel_file, index=False)
     print('Results have been saved in an Excel file named : ', name_excel_file)
+
+
+
+
 
 
 if __name__ == '__main__':
