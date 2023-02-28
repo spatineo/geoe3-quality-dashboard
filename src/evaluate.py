@@ -56,8 +56,9 @@ def evaluate_results(eval_criteria, result, context):
 
 '''
 
-import operator
 from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
 
 # Evaluate presence of a value : 0 if not / 5 if yes
 def evaluate_presence(rule, value, min,max):
@@ -249,3 +250,42 @@ evaluator_by_type = {
     'maintenance': evaluate_maintenance
 }
 
+# Score each category of quality element
+def evaluate_categories(df):
+
+    # calculate measure scores
+    measure_scores = df.groupby(['Viewpoint', 'Dimension', 'Element', 'Measure']) \
+                    .apply(lambda x: sum(x['Score'] * x['Metric_Weight']) / sum(x['Metric_Weight'])) \
+                    .reset_index(name='Measure_Score')
+
+    # join measure scores back to original dataframe
+    df = pd.merge(df, measure_scores, on=['Viewpoint', 'Dimension', 'Element', 'Measure'])
+    # calculate element scores
+    element_scores = df.groupby(['Viewpoint', 'Dimension', 'Element']) \
+                    .apply(lambda x: sum(x['Measure_Score'] * x['Measure_Weight']) / sum(x['Measure_Weight'])) \
+                    .reset_index(name='Element_Score')
+    df = pd.merge(df, element_scores, on=['Viewpoint', 'Dimension', 'Element'])
+
+    # calculate dimension scores
+    dimension_scores = df.groupby(['Viewpoint', 'Dimension']) \
+                        .apply(lambda x: sum(x['Element_Score'] * x['Element_Weight']) / sum(x['Element_Weight'])) \
+                        .reset_index(name='Dimension_Score')
+    df = pd.merge(df, dimension_scores, on=['Viewpoint', 'Dimension'])
+    # calculate viewpoint scores
+    viewpoint_scores = df.groupby(['Viewpoint']) \
+                        .apply(lambda x: sum(x['Dimension_Score'] * x['Dimension_Weight']) / sum(x['Dimension_Weight'])) \
+                        .reset_index(name='Viewpoint_Score')
+    df = pd.merge(df, viewpoint_scores, on=['Viewpoint'])
+
+    return df
+
+''' # Print the results
+    print('Measure Scores:\n', measure_scores)
+    print('Element Scores:\n', element_scores)
+    print('Dimension Scores:\n', dimension_scores)
+    print('Viewpoint Scores:\n', viewpoint_scores)'''
+
+''' # To Excel
+    name_excel_file = datetime.now().strftime('%Y%m%d_%H%M%S') + '.xlsx'
+    grouped_mean.to_excel(name_excel_file, index=False)
+    print('Scores have been saved in an Excel file named : ', name_excel_file)'''
