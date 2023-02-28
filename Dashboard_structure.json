@@ -6,6 +6,7 @@
 "ServiceAndDataset": {
     "type": "viewpoint",
     "name": "serviceAndDataset",
+    "weight": 1,
     "nodes": {
         "serviceQuality":{
             "type": "dimension",
@@ -1439,32 +1440,7 @@
                             "name": "MaintenanceFrequency",
                             "weight": 7,
                             "nodes": {
-                                "metric1": {
-                                    "type": "metric",
-                                    "name": "MatchMaintenanceExpected",
-                                    "weight": 7,
-                                    "description": "Checks that the last maintenance date matches with the declared maintenance frequency.",
-                                    "extractionRule": {
-                                        "type": "xpath",
-                                        "source": "dataset-metadata",
-                                        "rule": "//gmd:MD_Metadata //gmd:identificationInfo//gmd:MD_DataIdentification//gmd:resourceMaintenance//gmd:MD_MaintenanceInformation//gmd:maintenanceAndUpdateFrequency//gmd:MD_MaintenanceFrequencyCode//@codeListValue",
-                                        "value": "text"
-                                    },
-                                    "evaluationRule":{
-                                        "type": "maintenance",
-                                        "rule": {
-                                            "rule_continual": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='continual']/gmd:maintenanceDate/gco:DateTime[@valueDateTime > current-dateTime() - xs:dayTimeDuration('PT24H')]",
-                                            "rule_daily": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='daily']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('PT24H')]",  
-                                            "rule_weekly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='weekly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P7D')]", 
-                                            "rule_fortnightly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='fortnightly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P14D')]", 
-                                            "rule_montly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='monthly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P31D')]", 
-                                            "rule_quaterly": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='quarterly']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P93D')]", 
-                                            "rule_biannualy": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='biannually']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P186D')]", 
-                                            "rule_annualy": "//gmd:maintenanceInformation/gmd:MD_MaintenanceInformation[gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue='annually']/gmd:maintenanceDate/gco:DateTime[@valueDateTime >= current-dateTime() - xs:dayTimeDuration('P1Y')]" 
-                                            },
-                                        "description": "Returns True if declared frequency matches last maintenance date. If declared frequency is 'asNeeded','irregular','notPlanned',or 'unknown', returns nothing"
-                                    }
-                                },
+                                
                                 "metric2": {
                                     "type": "metric",
                                     "name": "MatchMaintenanceFreqRequested",
@@ -1696,7 +1672,7 @@
                         "distance": {
                             "type": "measure",
                             "name": "distance",
-                            "weigth": 5,
+                            "weight": 5,
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
