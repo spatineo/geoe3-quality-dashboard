@@ -1,7 +1,89 @@
 {
 "UseCase": {
     "type": "viewpoint",
-    "name": "useCase"
+    "name": "useCase",
+    "weight": 1,
+    "nodes": {
+        "Understandability": {
+            "type": "dimension",
+            "name": "Understandability",
+            "weight": 5,
+            "nodes": {
+                "Language": {
+                    "type": "qualityElement",
+                    "name": "Language",
+                    "weight": 5,
+                    "nodes": {
+                        "LanguagePresence": {
+                            "type": "measure",
+                            "name": "LanguagePresence",
+                            "weight": 5,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "ResourceLanguage",
+                                    "weight": 5,
+                                    "description": "Language(s) used within the datasets.",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:identificationInfo//gmd:language//gmd:LanguageCode/@codeListValue",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Resource Language is present"
+                                    }
+                                },
+                                "metric2": {
+                                    "type": "metric",
+                                    "name": "MetadataLanguage",
+                                    "weight": 5,
+                                    "description": "Language in which the metadata elements are expressed",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeListValue",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "presence",
+                                        "description": "Metadata language is present"
+                                    }
+                                }
+                            }
+                        },
+                        "LanguageEnglish": {
+                            "type": "measure",
+                            "name": "LanguageEnglish",
+                            "weight": 8,
+                            "nodes": {
+                                "metric1": {
+                                    "type": "metric",
+                                    "name": "English",
+                                    "weight": 5,
+                                    "description": "Default language OR one of the alternate languages is English",
+                                    "extractionRule": {
+                                        "type": "xpath",
+                                        "source": "dataset-metadata",
+                                        "rule": "//gmd:MD_Metadata //gmd:locale//gmd:LanguageCode/@codeListValue",
+                                        "value": "text"
+                                    },
+                                    "evaluationRule": {
+                                        "type": "comparison",
+                                        "referenceValue": "eng",
+                                        "operator": "is",
+                                        "description": "Default language of the Metadata OR one of its alternate languages is English"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
 },
 "ServiceAndDataset": {
     "type": "viewpoint",
@@ -1702,6 +1784,412 @@
 },
 "Interoperability": {
     "type": "viewpoint",
-    "name": "interoperability"
+    "name": "interoperability",
+    "weight": 1,
+    "nodes":{
+        "InteroperabilityMap":{
+            "type": "dimension",
+            "name": "TechnicalInteroperability",
+            "weight": 5,
+            "nodes": {
+                "Version": {
+                    "type": "qualityElement",
+                    "name": "Version",
+                    "weight": 5,
+                    "nodes": {
+                        "type": "measure",
+                        "name": "Version",
+                        "weight": 5,
+                        "nodes": {
+                            "type": "metric",
+                            "name": "Version",
+                            "weight": 5,
+                            "description": "Date of last evaluation of interoperability",
+                            "extractionRule": {
+                            },
+                            "evaluationRule": {
+                            }
+                        }
+                    }
+                },
+                "UseCase1": {
+                    "type": "qualityElement",
+                    "name": "UseCase1",
+                    "weight": 5,
+                    "nodes": {
+                        "TechnicalInteroperability": {
+                            "type": "measure",
+                            "name": "TechnicalInteroperability",
+                            "weight": 5,
+                            "nodes": {
+                                "MetadataDiscoverability": {
+                                    "type": "metric",
+                                    "name": "MetadataDiscoverability",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataAccessibility": {
+                                    "type": "metric",
+                                    "name": "DataAccessibility",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "LegalAndOrganizationalInteroperability": {
+                            "type": "measure",
+                            "name": "LegalAndOrganizationalInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "NationalData": {
+                                    "type": "metric",
+                                    "name": "NationalData",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "SemanticInteroperability": {
+                            "type": "measure",
+                            "name": "SemanticInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "QualityAssessment": {
+                                    "type": "metric",
+                                    "name": "QualityAssessment",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataContentAndQuality": {
+                                    "type": "metric",
+                                    "name": "DataContentAndQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "VocabularyAndDataQuality": {
+                                    "type": "metric",
+                                    "name": "VocabularyAndDataQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "UseCase2": {
+                    "type": "qualityElement",
+                    "name": "UseCase2",
+                    "weight": 5,
+                    "nodes": {
+                        "TechnicalInteroperability": {
+                            "type": "measure",
+                            "name": "TechnicalInteroperability",
+                            "weight": 5,
+                            "nodes": {
+                                "MetadataDiscoverability": {
+                                    "type": "metric",
+                                    "name": "MetadataDiscoverability",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataAccessibility": {
+                                    "type": "metric",
+                                    "name": "DataAccessibility",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "LegalAndOrganizationalInteroperability": {
+                            "type": "measure",
+                            "name": "LegalAndOrganizationalInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "NationalData": {
+                                    "type": "metric",
+                                    "name": "NationalData",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "SemanticInteroperability": {
+                            "type": "measure",
+                            "name": "SemanticInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "QualityAssessment": {
+                                    "type": "metric",
+                                    "name": "QualityAssessment",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataContentAndQuality": {
+                                    "type": "metric",
+                                    "name": "DataContentAndQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "VocabularyAndDataQuality": {
+                                    "type": "metric",
+                                    "name": "VocabularyAndDataQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "UseCase3": {
+                    "type": "qualityElement",
+                    "name": "UseCase3",
+                    "weight": 5,
+                    "nodes": {
+                        "TechnicalInteroperability": {
+                            "type": "measure",
+                            "name": "TechnicalInteroperability",
+                            "weight": 5,
+                            "nodes": {
+                                "MetadataDiscoverability": {
+                                    "type": "metric",
+                                    "name": "MetadataDiscoverability",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataAccessibility": {
+                                    "type": "metric",
+                                    "name": "DataAccessibility",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "LegalAndOrganizationalInteroperability": {
+                            "type": "measure",
+                            "name": "LegalAndOrganizationalInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "NationalData": {
+                                    "type": "metric",
+                                    "name": "NationalData",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        },
+                        "SemanticInteroperability": {
+                            "type": "measure",
+                            "name": "SemanticInteroperability",
+                            "weight": 5,
+                            "nodes": {  
+                                "QualityAssessment": {
+                                    "type": "metric",
+                                    "name": "QualityAssessment",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "DataContentAndQuality": {
+                                    "type": "metric",
+                                    "name": "DataContentAndQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                },
+                                "VocabularyAndDataQuality": {
+                                    "type": "metric",
+                                    "name": "VocabularyAndDataQuality",
+                                    "weight": 5,
+                                    "description": "",
+                                    "extractionRule": {
+                                    },
+                                    "evaluationRule": {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Portability": {
+
+        },
+        "InformationSecurity": {
+            "Traceability": {
+                "type": "qualityElement",
+                "name": "Traceability",
+                "weight": 5,
+                "nodes": {
+                    "Traceability": {
+                        "type": "measure",
+                        "name": "Traceability",
+                        "weight": 5,
+                        "nodes": {
+                            "metric1": {
+                                "type": "metric",
+                                "name": "Traceability",
+                                "weight": 5,
+                                "description": "Dataset can be traced to its origin",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "//gmd:identificationInfo[1]//gmd:spatialResolution//gmd:equivalentScale//gmd:denominator",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "range",
+                                    "minimum": 490,
+                                    "maximum": 510,
+                                    "description": "Map scale should be between 1/4900 and 1/5100 (user request)."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Confidentiality": {
+                "type": "qualityElement",
+                "name": "Confidentiality",
+                "weight": 5,
+                "nodes": {
+                    "Authentification": {
+                        "type": "measure",
+                        "name": "Authentification",
+                        "weight": 5,
+                        "nodes": {
+                            "metric1": {
+                                "type": "metric",
+                                "name": "Authentification",
+                                "weight": 5,
+                                "description": "Need autentification of any sort",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "//gmd:identificationInfo[1]//gmd:spatialResolution//gmd:equivalentScale//gmd:denominator",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "range",
+                                    "minimum": 490,
+                                    "maximum": 510,
+                                    "description": "Map scale should be between 1/4900 and 1/5100 (user request)."
+                                }
+                            }
+                        }
+                    },
+                    "OpenSource": {
+                        "type": "measure",
+                        "name": "OpenSource",
+                        "weight": 5,
+                        "nodes": {
+                            "metric1": {
+                                "type": "metric",
+                                "name": "OpenSource",
+                                "weight": 5,
+                                "description": "Is OpenSource data",
+                                "extractionRule": {
+                                    "type": "xpath",
+                                    "source": "dataset-metadata",
+                                    "rule": "//gmd:identificationInfo[1]//gmd:spatialResolution//gmd:equivalentScale//gmd:denominator",
+                                    "value": "text"
+                                },
+                                "evaluationRule": {
+                                    "type": "range",
+                                    "minimum": 490,
+                                    "maximum": 510,
+                                    "description": "Map scale should be between 1/4900 and 1/5100 (user request)."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 }
