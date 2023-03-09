@@ -3,21 +3,25 @@
     "type": "viewpoint",
     "name": "useCase",
     "weight": 1,
+    "description": "Viewpoint focused on the user and its use case. Displays the less technical data such as XXX",
     "nodes": {
         "Understandability": {
             "type": "dimension",
             "name": "Understandability",
             "weight": 5,
+            "description": "Quality Dimension under the Use Case Viewpoint. Describes wether the dataset can easily be understood by potential users.",
             "nodes": {
                 "Language": {
                     "type": "qualityElement",
                     "name": "Language",
                     "weight": 5,
+                    "description": "Quality Element under the Understandability Dimension. Evaluates language requirements (specification of language, English available..). ",
                     "nodes": {
                         "LanguagePresence": {
                             "type": "measure",
                             "name": "LanguagePresence",
                             "weight": 5,
+                            "description": "Language should be specified.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -57,6 +61,7 @@
                             "type": "measure",
                             "name": "LanguageEnglish",
                             "weight": 8,
+                            "description": "Describes wether English is available.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -89,21 +94,25 @@
     "type": "viewpoint",
     "name": "serviceAndDataset",
     "weight": 1,
+    "description": "Viewpoint focused on Service availability and technical evaluations. Use of ISO standards, Quality Evaluation Software and Metadata.",
     "nodes": {
         "serviceQuality":{
             "type": "dimension",
             "name": "serviceQuality",
             "weight": 6,
+            "description": "Dimension under the Service and Dataset Viewpoint. Evaluates the quality of the service that provides the data.",
             "nodes": {
                 "serviceRobustness": {
                     "type": "qualityElement",
                     "name": "serviceRobustness",
                     "weight": 5,
+                    "description": "Quality Element evaluating the service's robustness.",
                     "nodes": {
                         "availability": {
                             "type": "measure",
                             "name": "availability",
                             "weight": 5,
+                            "description": "Displays availability statistics of the service.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -119,14 +128,14 @@
                                     },
                                     "evaluationRule": {
                                         "type": "presence",
-                                        "descritpiton": "Checks presence"
+                                        "description": "Checks presence"
                                     }
                                 }, 
                                 "metric2": {
                                     "type": "metric",
                                     "name": "daysOfResponseTimeMetrics",
                                     "weight": 0,
-                                    "descritpiton": "For how many days response time metrics are calculated",
+                                    "description": "For how many days response time metrics are calculated",
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
@@ -136,14 +145,14 @@
                                     },
                                     "evaluationRule": {
                                         "type": "presence",
-                                        "descritpiton": "Checks presence"
+                                        "descripiton": "Checks presence"
                                     }
                                 },
                                 "metric0": {
                                     "type": "metric",
                                     "name": "serviceId",
                                     "weight": 0,
-                                    "descritpiton": "Service ID",
+                                    "description": "Service ID",
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
@@ -153,7 +162,7 @@
                                     },
                                     "evaluationRule":{
                                         "type": "presence",
-                                        "descritpiton": "Checks presence"
+                                        "description": "Checks presence"
                                     }
                                 },
                                 "metric3": {
@@ -380,16 +389,19 @@
             "type": "dimension",
             "name": "Completeness",
             "weight": 5,
+            "description": "Presence and absence of features, their attributes and their relationship [ISO 19157-1:2021].",
             "nodes": {
                 "omission": {
                     "type": "qualityElement",
                     "name": "Omission",
                     "weight": 5,
+                    "description": "Data absent from the dataset, as described by the scope [ISO 19157-1:2021].",
                     "nodes": {
                         "missingItem" : {
                             "type": "measure",
                             "name": "missingItem",
                             "weight": 5,
+                            "description": "Evaluation based on missing items in the data.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -453,11 +465,13 @@
                     "type": "qualityElement",
                     "name": "Comission",
                     "weight": 5,
+                    "description": "Excess data present in the dataset, as described by the scope [ISO 19157-1:2021].",
                     "nodes": {
                         "itemDucplicate": {
                             "type": "measure",
                             "name": "itemDuplicate",
                             "weight": 2,
+                            "description": "Evaluation based on duplicate items in the data.",
                             "nodes": {
                                 "metric1" : {
                                     "type": "metric",
@@ -483,6 +497,7 @@
                             "type": "measure",
                             "name": "itemExcess",
                             "weight": 5,
+                            "description": "Evaluation based on excess items in the data.",
                             "nodes": {
                             }, 
                             "metric1": {
@@ -546,16 +561,19 @@
             "type": "dimension",
             "name": "ThematicQuality",
             "weight": 5,
+            "description": "Thematic quality is defined as the accuracy of quantitative attributes and the correctness of non-quantitative attributes and of the classifications of features and their relationships [ISO 19157-1:2021].",
             "nodes": {
                 "quantitativeAttributeAccuracy": {
                     "type": "qualityElement",
                     "name": "QuantitativeAttributeAccuracy",
                     "weight": 7,
+                    "description": "Closeness of the value of a quantitative attribute to a value accepted as or known to be true [ISO 19157-1:2021].",
                     "nodes": {
                         "dateLastEvalQAA": {
                             "type": "measure",
                             "name": "dateLastEvalQAA",
                             "weight": 8,
+                            "description": "Evaluation based on the date of last Evaluation.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -581,6 +599,7 @@
                             "type": "measure",
                             "name": "AttributeValueUncertainty",
                             "weight": 5,
+                            "description": "Attribute value uncertainty.",
                             "nodes": {
                                 "AVU68": {
                                     "type": "metric",
@@ -626,11 +645,13 @@
                     "type": "qualityElement",
                     "name": "NonQuantitativeAttributeCorrectness",
                     "weight": 7,
+                    "description": "Correctness of non-quantitative attributes is correct or incorrect [ISO 19157-1:2021].",
                     "nodes": {
                         "dateLastEvalNQAC": {
                             "type": "measure",
                             "name": "dateLastEvalNQAC",
                             "weight": 8,
+                            "description": "Evaluation based on the date of last Evaluation.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -656,6 +677,7 @@
                             "type": "measure",
                             "name": "missclassNQAC",
                             "weight": 6,
+                            "description": "Evaluation based on the missclassification of non-quantitative attributes.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -701,16 +723,19 @@
                     "type": "qualityElement",
                     "name": "ClassificationCorrectness",
                     "weight": 7,
+                    "description": "Comparison of the classes assigned to features or their attributes to a universe of discourse [ISO 19157-1:2021].",
                     "nodes": {
                         "dateLastEvalThematicQuality": {
                             "type": "measure",
                             "name": "dateLastEvalThematicQuality",
                             "weight": 8,
+                            "description": "Evaluation based on the date of last Evaluation.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
                                     "name": "dateLastEvalThematicQuality",
                                     "weight": 5,
+                                    "description": "Date of last Evaluation.",
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "dataset-metadata",
@@ -731,6 +756,7 @@
                             "type": "measure",
                             "name": "missclassTCC",
                             "weight": 5,
+                            "description": "Evaluation based on thematic missclassification.",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -778,16 +804,19 @@
             "type": "dimension",
             "name": "LogicalConsistency",
             "weight": 5,
+            "description": "Degree of adherence to logical rules of data structure, attribution and relationships (data structure can be conceptual, logical or physical) [ISO 19157-1:2021].",
             "nodes": {
                 "ConceptualConsistency": {
                     "type": "element",
                     "name": "ConceptualConsistency",
                     "weight": 6,
+                    "description": "Adherence to rules of the conceptual schema [ISO 19157-1:2021].",
                     "nodes":{
                         "FailsOGC" : {
                             "type": "measure",
                             "name": "FailsOGC",
                             "weight": 7,
+                            "description": "Evaluation based on wether the data follows OGC principles.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -833,6 +862,7 @@
                             "type": "measure",
                             "name": "MissingVertexNormals",
                             "weight": 5,
+                            "description": "Evaluation based on wether the data is missing vertex normals.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -859,6 +889,7 @@
                             "type": "measure",
                             "name": "SurfacesWronglyOriented",
                             "weight": 5,
+                            "description": "Evaluation based on wether the data has mistakes in the orientation of surfaces.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -887,11 +918,13 @@
                     "type": "element",
                     "name": "DomainConsistency",
                     "weight": 5,
+                    "description": "Adherence of values to the value domains [ISO 19157-1:2021].",
                     "nodes":{
                         "AttributeValueNotInAllowedRange": {
                             "type": "measure",
                             "name": "AttributeValueNotInAllowedRange",
                             "weight": 5,
+                            "description": "Describes wether the attribute value is within allowed range.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -920,11 +953,13 @@
                     "type": "element",
                     "name": "FormatConsistency",
                     "weight": 8,
+                    "description": "Degree to which data are stored in accordance with the physical structure of the dataset, as described by the scope [ISO 19157-1:2021].",
                     "nodes":{
                         "MismatchedDimensions": {
                             "type": "measure",
                             "name": "MismatchedDimensions",
                             "weight": 5,
+                            "description": "Evaluates the presence of mismatched dimensions.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -951,6 +986,7 @@
                             "type": "measure",
                             "name": "Not3D",
                             "weight": 5,
+                            "description": "Describes wether the coordinate reference system is in 3D (as it should) or not.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -977,6 +1013,7 @@
                             "type": "measure",
                             "name": "WrongDataType",
                             "weight": 5,
+                            "description": "Desctibes wether the data type of attriute is valid.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1006,11 +1043,13 @@
                     "type": "element",
                     "name": "GeometricConsistency",
                     "weight": 5,
+                    "description": "Refers to the property of a set of geometric objects or transformations that preserve their relative position or shape.",
                     "nodes":{
                         "GroundOverlappingIn2D": {
                             "type": "measure",
                             "name": "GroundOverlappingIn2D",
                             "weight": 5,
+                            "description": "Describes wether features overlap.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1037,6 +1076,7 @@
                             "type": "measure",
                             "name": "DegenerateCorruptGeometries",
                             "weight": 5,
+                            "description": "Describe wether the geometry of features is valid.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1063,12 +1103,13 @@
                             "type": "measure",
                             "name": "NonPlanarSurfaces",
                             "weight": 5,
-                            "description": "The face or BoundarySurface must be planar.",
+                            "description": "Describes wether surfaces are planar.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
                                     "name": "NonPlanarSurfaces",
                                     "weight": 5,
+                                    "description": "The face or BoundarySurface must be planar.",
                                     "extractionRule": {
                                         "type": "formula",
                                         "source": "quality-evaluation",
@@ -1089,6 +1130,7 @@
                             "type": "measure",
                             "name": "GroundHigherThanRoof",
                             "weight": 5,
+                            "description": "Describes errors due to incoherent heights of ground an roof in relation with each other.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1134,6 +1176,7 @@
                             "type": "measure",
                             "name": "FeatureHasSpikes",
                             "weight": 5,
+                            "description": "Evaluation based on spikes in dataset that exceed tolerance.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1160,6 +1203,7 @@
                             "type": "measure",
                             "name": "GeometryTooSmall",
                             "weight": 5,
+                            "description": "Describes wether some geometry are too small.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1205,6 +1249,7 @@
                             "type": "measure",
                             "name": "Orientation",
                             "weight": 5,
+                            "description": "Evaluation based on presence of inccorect orientation.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1271,11 +1316,13 @@
                     "type": "element",
                     "name": "TopologicalConsistency",
                     "weight": 5,
+                    "description": "Correctness of the explicitly encoded topological characteristics of the dataset as described by the scope [ISO 19157-1:2021].",
                     "nodes":{
                         "MissingConnections": {
                             "type": "measure",
                             "name": "MissingConnections",
                             "weight": 5,
+                            "description": "Describes wether connections are missing.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1303,6 +1350,7 @@
                             "type": "measure",
                             "name": "InvalidSolidVoids",
                             "weight": 5,
+                            "description": "Describes wether the solid contains problems.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1329,6 +1377,7 @@
                             "type": "measure",
                             "name": "InvalidSelfInterestOverlapErrors",
                             "weight": 5,
+                            "description": "Describes wether vertices of the feature are correctly connected.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1355,6 +1404,7 @@
                             "type": "measure",
                             "name": "InvalidSolidBoundaries",
                             "weight": 5,
+                            "description": "The solid boundaries must be valid.",
                             "nodes":{
                                 "metric1": {
                                     "type": "metric",
@@ -1385,16 +1435,19 @@
             "type": "dimension",
             "name": "TemporalQuality",
             "weight": 7,
+            "description": "Accuracy of the temporal attributes and temporal relationships of features [ISO 19157-1:2021].",
             "nodes": {
                 "AccuracyTimeMeasurment": {
                     "type": "qualityElement",
                     "name": "AccuracyTimeMeasurment",
                     "weight": 5,
+                    "description": "Closeness of reported time measurements to values accepted as true [ISO 19157-1:2021].",
                     "nodes": {
                         "TimeAccuracy": {
                             "type": "measure",
                             "name": "TimeAccuracy",
                             "weight": 5,
+                            "description": "Time accuracy at XX.X % significance level [ISO 19157-3:2021]..",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1422,11 +1475,13 @@
                     "type": "qualityElement",
                     "name": "TemporalConsistency",
                     "weight": 5,
+                    "description": "Evaluates the correctness of the order of events [ISO 19157-1:2021].",
                     "nodes": {
                         "ChronologicalOrder": {
                             "type": "measure",
                             "name": "ChronologicalOrder",
                             "weight": 5,
+                            "description": "Time accuracy at 99,8 % significance level [ISO 19157-3:2021]",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1454,11 +1509,13 @@
                     "type": "qualityElement",
                     "name": "TemporalValidity",
                     "weight": 9,
+                    "description": "Validity of data with respect to time. [ISO 19157-1:2021].",
                     "nodes": {
                         "Currentness": {
                             "type": "measure",
                             "name": "Currentness",
                             "weight": 8,
+                            "description": "Degree to which data has attributes that are of the right age in a specific context of use [25012:2008].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1521,6 +1578,7 @@
                             "type": "measure",
                             "name": "MaintenanceFrequency",
                             "weight": 7,
+                            "description": "evaluation if a dataset is maintained as set as maintenance frequency [ISO 19157-3:2021].",
                             "nodes": {
                                 
                                 "metric2": {
@@ -1551,16 +1609,19 @@
             "type": "dimension",
             "name": "PositionnalAccuracy",
             "weight": 5,
+            "description": "Accuracy of the position of features [ISO 19157-1:2021].",
             "nodes": {
                 "AbsolutePositionalAccuracy": {
                     "type": "qualityElement",
                     "name": "AbsolutePositionalAccuracy",
                     "weight": 8,
+                    "description": "Closeness of reported coordinate values to values accepted as true in a standard coordinate reference system [ISO 19157-1:2021].",
                     "nodes": {
                         "MeanValuePosUncertainties": {
                             "type": "measure",
                             "name": "MeanValuePosUncertainties",
                             "weight": 8,
+                            "description": "Mean value of the positional uncertainties for a set of positions where the positional uncertainties are defined as the distance between a measured position and what is accepted as the corresponding true position [ISO 19157-3:2021].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1610,11 +1671,13 @@
                     "type": "qualityElement",
                     "name": "RelativePositionalAccuracy",
                     "weight": 8,
+                    "description": "Closeness of the relative positions of features in the scope to their respective relative positions accepted as true in a local coordinate reference system [ISO 19157-1:2021].",
                     "nodes": {
                         "RelativeVerticalError": {
                             "type": "measure",
                             "name": "RelativeVerticalError",
                             "weight": 5,
+                            "description": "evaluation of the random errors of one relief feature to another in the same dataset or on the same map/chart [ISO 19157-3:2021].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1640,6 +1703,7 @@
                             "type": "measure",
                             "name": "RelativeHorizontalError",
                             "weight": 5,
+                            "description": "Evaluation of the random errors in the horizontal position of one feature to another in the same dataset or on the same map/chart [ISO 19157-3:2021].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1667,11 +1731,13 @@
                     "type": "qualityElement",
                     "name": "GriddedPositionalAccuracy",
                     "weight": 5,
+                    "description": "Closeness of gridded data position values to values accepted as true [ISO 19157-1:2021].",
                     "nodes":{
                         "CircularSD": {
                             "type": "measure",
                             "name": "CircularSD",
                             "weight": 5,
+                            "description": "Circular standard deviation, also known as circular standard error, Helmert’s point error, CSE [ISO 19157-3:2021].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1698,12 +1764,13 @@
                             "type": "measure",
                             "name": "RMSErrorPlanimetry",
                             "weight": 10,
-                            "description": "Root mean square error of planimetry",
+                            "description": "Root mean square error of planimetry [ISO 19157-3:2021].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
                                     "name": "RMSEPlanimetry",
                                     "weight": 5,
+                                    "description": "Radius of a circle around the given point, in which the true value lies with probability P [ISO 19157-3:2021].s",
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "dataset-metadata",
@@ -1725,11 +1792,13 @@
                     "type": "qualityElement",
                     "name": "SpatialResolution",
                     "weight": 16,
+                    "description": "Spatial resolution of the dataset.",
                     "nodes":{
                         "equivalentScale": {
                             "type": "measure",
                             "name": "equivalentScale",
                             "weight": 5,
+                            "description": "Level of detail expressed as the scale denominator of a comparable hardcopy map or chart [MD_IR_and_ISO_20081219].",
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
@@ -1755,12 +1824,13 @@
                             "type": "measure",
                             "name": "distance",
                             "weight": 5,
+                            "description": "Ground sample distance [MD_IR_and_ISO_20081219].", 
                             "nodes": {
                                 "metric1": {
                                     "type": "metric",
                                     "name": "Distance",
                                     "weight": 5,
-                                    "description": "Ground sample distanceEach spatialResoultion element must contain either an equivalent scale or a distance but not both",
+                                    "description": "Ground sample distance. Each 'spatialResoultion' element must contain either an equivalent scale or a distance but not both",
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "dataset-metadata",
@@ -1786,20 +1856,24 @@
     "type": "viewpoint",
     "name": "interoperability",
     "weight": 1,
+    "description": "Viewpoint focused on the interoperability capacity of the dataset and service. Includes evaluations from the GeoE3 Data Maturity Model and Interoperability Map.",
     "nodes":{
         "InteroperabilityMap":{
             "type": "dimension",
             "name": "TechnicalInteroperability",
             "weight": 5,
+            "description": "XX.",
             "nodes": {
                 "Version": {
                     "type": "qualityElement",
                     "name": "Version",
                     "weight": 5,
+                    "description": "Version of last evaluation.",
                     "nodes": {
                         "type": "measure",
                         "name": "Version",
                         "weight": 5,
+                        "description": "Version of last evaluation.",
                         "nodes": {
                             "type": "metric",
                             "name": "Version",
@@ -1816,11 +1890,13 @@
                     "type": "qualityElement",
                     "name": "UseCase1",
                     "weight": 5,
+                    "description": "XX.",
                     "nodes": {
                         "TechnicalInteroperability": {
                             "type": "measure",
                             "name": "TechnicalInteroperability",
                             "weight": 5,
+                            "description": "XX.",
                             "nodes": {
                                 "MetadataDiscoverability": {
                                     "type": "metric",
@@ -1850,6 +1926,7 @@
                             "type": "measure",
                             "name": "LegalAndOrganizationalInteroperability",
                             "weight": 5,
+                            "description": "XX.",
                             "nodes": {  
                                 "NationalData": {
                                     "type": "metric",
@@ -1868,6 +1945,7 @@
                             "type": "measure",
                             "name": "SemanticInteroperability",
                             "weight": 5,
+                            "description": "XX.",
                             "nodes": {  
                                 "QualityAssessment": {
                                     "type": "metric",
@@ -1910,6 +1988,7 @@
                     "type": "qualityElement",
                     "name": "UseCase2",
                     "weight": 5,
+                    "description": "XX.",
                     "nodes": {
                         "TechnicalInteroperability": {
                             "type": "measure",
@@ -2004,6 +2083,7 @@
                     "type": "qualityElement",
                     "name": "UseCase3",
                     "weight": 5,
+                    "description": "XX.",
                     "nodes": {
                         "TechnicalInteroperability": {
                             "type": "measure",
@@ -2104,11 +2184,13 @@
                 "type": "qualityElement",
                 "name": "Traceability",
                 "weight": 5,
+                "description": "XX.",
                 "nodes": {
                     "Traceability": {
                         "type": "measure",
                         "name": "Traceability",
                         "weight": 5,
+                        "description": "XX.",
                         "nodes": {
                             "metric1": {
                                 "type": "metric",
@@ -2136,11 +2218,13 @@
                 "type": "qualityElement",
                 "name": "Confidentiality",
                 "weight": 5,
+                "description": "XX.",
                 "nodes": {
                     "Authentification": {
                         "type": "measure",
                         "name": "Authentification",
                         "weight": 5,
+                        "description": "XX.",
                         "nodes": {
                             "metric1": {
                                 "type": "metric",
@@ -2166,6 +2250,7 @@
                         "type": "measure",
                         "name": "OpenSource",
                         "weight": 5,
+                        "description": "XX.",
                         "nodes": {
                             "metric1": {
                                 "type": "metric",
