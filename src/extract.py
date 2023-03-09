@@ -29,6 +29,11 @@ def execute_load_API(rule,serviceId):
 
 # This function extracts values from the JSON structure file and applies execute_xpath_rule to the xpath rules. Returns a table.
 def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, func = None):
+    model = {
+        'dataset-metadata': load_dataset_metadata(metadata_file),
+        'service-availability' : "",
+        'quality-evaluation': qualityEvaluation_file
+    }
     result = []
     table_data = []
     table_data_scores = []
@@ -40,6 +45,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                     for key4, value4 in value3.items():
                         if key4 == "nodes":
                             for key5, value5 in value4.items():
+                                print(key5)
                                 for key6, value6 in value5.items():
                                     if key6 == "nodes":
                                         for key7, value7 in value6.items():
@@ -51,14 +57,19 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                 row = {
                                                                     "Viewpoint": value1["name"],
                                                                     "Viewpoint_Weight": value1["weight"],
+                                                                    "Viewpoint_Description": value1["description"],
                                                                     "Dimension": value3["name"],
                                                                     "Dimension_Weight": value3["weight"],
+                                                                    "Dimension_Description": value3["description"],
                                                                     "Element": value5["name"],
                                                                     "Element_Weight": value5["weight"],
+                                                                    "Element_Description": value5["description"],
                                                                     "Measure": value7["name"],
                                                                     "Measure_Weight": value7["weight"],
+                                                                    "Element_Description": value7["description"],
                                                                     "Metric": value9["name"],
                                                                     "Metric_Weight": value9["weight"],
+                                                                    "Metric_Description": value9["description"],
                                                                     "Extraction_Rule": value9["extractionRule"],
                                                                     "Evaluation_Rule": value9["evaluationRule"]
                                                                 }
@@ -78,7 +89,6 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                         row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,qualityEvaluation_file,serviceId)                                              
                                                                     elif value10["source"] == "dataset-metadata":
                                                                         row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,metadata_file,serviceId)
-                                                                    row["Extraction_Rule_value"] 
 
                                                             if key10 == "evaluationRule":
                                                                 value = row["Extraction_Rule_value"]
@@ -101,6 +111,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                     '''elif value10["type"] == "maintenance":
                                                                         temp_df = pd.DataFrame(table_data)
                                                                         row["Score"] = evaluate(evaluationRule,value, frequency_code, '')'''
+                                                            
                                                                 table_data.append(row)
     result = pd.DataFrame(table_data)
     scores = evaluate_categories(result)
