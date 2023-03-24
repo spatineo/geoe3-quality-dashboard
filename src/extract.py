@@ -28,45 +28,65 @@ def execute_load_API(rule,serviceId):
     return api_data_path
 
 # This function extracts values from the JSON structure file and applies execute_xpath_rule to the xpath rules. Returns a table.
-def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, func = None):
+def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, interoperability_file, func = None):
     model = {
         'dataset-metadata': load_dataset_metadata(metadata_file),
         'service-availability' : "",
-        'quality-evaluation': qualityEvaluation_file
+        'quality-evaluation': qualityEvaluation_file,
+        'interoperability-maturity-model': interoperability_file
     }
     result = []
-    table_data = []
+    table_data_Metrics = []
+    table_data_VP = []
+    table_data_Dimensions = []
+    table_data_Elements = []
+    table_data_Measures = []
     table_data_scores = []
     url_start_previous = ""
     for key1, value1 in my_dict.items():
+        rowVP = {
+            "Viewpoint": value1["name"],
+            "Viewpoint_Weight": value1["weight"],
+            "Viewpoint_Description": value1["description"]
+        }
+        table_data_VP.append(rowVP)
         for key2, value2 in value1.items():
             if key2 == "nodes":
                 for key3, value3 in value2.items():
+                    rowDimension = {
+                        "Viewpoint": value1["name"],
+                        "Dimension": value3["name"],
+                         "Dimension_Weight": value3["weight"],
+                         "Dimension_Description": value3["description"]
+                    }
+                    table_data_Dimensions.append(rowDimension)
                     for key4, value4 in value3.items():
                         if key4 == "nodes":
                             for key5, value5 in value4.items():
-                                print(key5)
+                                rowElement = {
+                                    "Dimension": value3["name"],
+                                    "Element": value5["name"],
+                                    "Element_Weight": value5["weight"],
+                                    "Element_Description": value5["description"],
+                                }
+                                table_data_Elements.append(rowElement)
                                 for key6, value6 in value5.items():
                                     if key6 == "nodes":
                                         for key7, value7 in value6.items():
+                                            rowMeasure = {
+                                                "Element": value5["name"],
+                                                "Measure": value7["name"],
+                                                "Measure_Weight": value7["weight"],
+                                                "Measure_Description": value7["description"]
+                                            }
+                                            table_data_Measures.append(rowMeasure)
                                             for key8, value8 in value7.items():
                                                 if key8 == "nodes":
                                                     for key9, value9 in value8.items():
                                                         for key10, value10 in value9.items():
                                                             if key10 == "extractionRule":
                                                                 row = {
-                                                                    "Viewpoint": value1["name"],
-                                                                    "Viewpoint_Weight": value1["weight"],
-                                                                    "Viewpoint_Description": value1["description"],
-                                                                    "Dimension": value3["name"],
-                                                                    "Dimension_Weight": value3["weight"],
-                                                                    "Dimension_Description": value3["description"],
-                                                                    "Element": value5["name"],
-                                                                    "Element_Weight": value5["weight"],
-                                                                    "Element_Description": value5["description"],
                                                                     "Measure": value7["name"],
-                                                                    "Measure_Weight": value7["weight"],
-                                                                    "Element_Description": value7["description"],
                                                                     "Metric": value9["name"],
                                                                     "Metric_Weight": value9["weight"],
                                                                     "Metric_Description": value9["description"],
@@ -82,13 +102,16 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                         model = {
                                                                             'dataset-metadata': load_dataset_metadata(metadata_file),
                                                                             'service-availability' : load_dataset_metadata(api_file),
-                                                                            'quality-evaluation': qualityEvaluation_file
+                                                                            'quality-evaluation': qualityEvaluation_file,
+                                                                            'interoperability-maturity-model': interoperability_file
                                                                         }
                                                                         row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,api_file,serviceId)   
                                                                     elif value10["source"] == "quality-evaluation":
                                                                         row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,qualityEvaluation_file,serviceId)                                              
                                                                     elif value10["source"] == "dataset-metadata":
                                                                         row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,metadata_file,serviceId)
+                                                                    elif value10["source"] == "interoperability-maturity-model":
+                                                                       row["Extraction_Rule_value"] = func(row["Extraction_Rule"],model,interoperability_file,serviceId)                                                                   
 
                                                             if key10 == "evaluationRule":
                                                                 value = row["Extraction_Rule_value"]
@@ -105,16 +128,20 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
                                                                         referenceValue = value10["referenceValue"]
                                                                         row["Score"] = evaluate(evaluationRule, value,operator,referenceValue)                                                
                                                                     elif value10["type"] == "comparisonDependent":
-                                                                        temp_df = pd.DataFrame(table_data)
+                                                                        temp_df = pd.DataFrame(table_data_Metrics)
                                                                         row["Score"] = evaluate(evaluationRule,value, temp_df, value10["dependentOn"])
                                                                     #For the MatchMaintenanceExpected metric but not sure I can compare it to any 'maintenance date'...
                                                                     '''elif value10["type"] == "maintenance":
                                                                         temp_df = pd.DataFrame(table_data)
                                                                         row["Score"] = evaluate(evaluationRule,value, frequency_code, '')'''
                                                             
-                                                                table_data.append(row)
-    result = pd.DataFrame(table_data)
-    scores = evaluate_categories(result)
+                                                                table_data_Metrics.append(row)
+    metrics = pd.DataFrame(table_data_Metrics)
+    VP = pd.DataFrame(table_data_VP)
+    D = pd.DataFrame(table_data_Dimensions)
+    E = pd.DataFrame(table_data_Elements)
+    M = pd.DataFrame(table_data_Measures)
+    M,E,D,VP = evaluate_categories(metrics,M,E,D,VP)
     '''Delete the temp file created to contain the API data'''
     try:
         os.remove(api_file)
@@ -122,7 +149,7 @@ def extract_all_info(my_dict, metadata_file, serviceId, qualityEvaluation_file, 
     except OSError as error:
         print(error)
 
-    return result, scores
+    return metrics, M,E,D,VP
 
 def extract_rule(rule, model,metadata,serviceId):
     extractor = extractor_by_type[rule['type']]
@@ -187,6 +214,7 @@ if __name__ == "__main__":
     metadata_file = 'MD_Bui_EX_1.xml'
     qualityEvaluation_file = 'C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/src/buildings_and_errors/results_NO_cc.csv'
     serviceId = input("Please enter the service ID (list of service Id : 39859,164572,157386,88383,157353) :")
+    interoperability_file = 'C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/src/interoperability_maturityModel.csv'
 
     # Read the JSON file structuring the dashboard
     structure_file = read_rules_from_json("C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/Dashboard_structure.json")
@@ -195,10 +223,11 @@ if __name__ == "__main__":
     model = {
         'dataset-metadata': load_dataset_metadata(metadata_file),
         'service-availability': 0,
-        'quality-evaluation': load_cvs(qualityEvaluation_file)
+        'quality-evaluation': load_cvs(qualityEvaluation_file),
+        'interoperability-maturity-model': load_cvs(interoperability_file)
     }
 
-    extractionRule_table = extract_all_info(structure_file, metadata_file, serviceId, qualityEvaluation_file, func = extract_rule)
+    extractionRule_table = extract_all_info(structure_file, metadata_file, serviceId, qualityEvaluation_file, interoperability_file, func = extract_rule)
     print(extractionRule_table)
 
     # save the DataFrame to an Excel file

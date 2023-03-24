@@ -1,6 +1,22 @@
 # geoe3-quality-dashboard
 GeoE3 quality dashboard - method for scoring services using metadata and monitoring information. You can read more about the project at https://geoe3.eu/ and https://geoe3platform.eu/geoe3/
 
+## Data flow of the program, from Python to Power BI
+
+The program requires the following input :
+- JSON structure file path;
+- service ID number ;
+- xml metadata file path ;
+- cvs quality evaluation file from GeoE3 quality software path ;
+- cvs interoperability map / maturity model path.
+
+Output of the program is :
+- 5 cvs files for the metrics / measures / elements / dimensions / viewpoints.
+
+Input in the Power BI dashboard : 
+- 5 cvs files for the metrics / measures / elements / dimensions / viewpoints ;
+- cvs interoperability map / maturity model path.
+
 ## Starting point
 
 Start implementation with a subset of metrics and a single service. The service chosen is the Norwegian building service.

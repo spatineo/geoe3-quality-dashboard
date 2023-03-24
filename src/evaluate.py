@@ -218,30 +218,31 @@ evaluator_by_type = {
 }
 
 # Score each category of quality element
-def evaluate_categories(df):
+def evaluate_categories(metrics,M,E,D,VP):
 
     # calculate measure scores
-    measure_scores = df.groupby(['Viewpoint', 'Dimension', 'Element', 'Measure']) \
+    measure_score = metrics.groupby(['Measure']) \
                     .apply(lambda x: sum(x['Score'] * x['Metric_Weight']) / sum(x['Metric_Weight'])) \
                     .reset_index(name='Measure_Score')
 
     # join measure scores back to original dataframe
-    df = pd.merge(df, measure_scores, on=['Viewpoint', 'Dimension', 'Element', 'Measure'])
+    M = pd.merge(M, measure_score, on=['Measure'])
+
     # calculate element scores
-    element_scores = df.groupby(['Viewpoint', 'Dimension', 'Element']) \
+    element_scores = M.groupby(['Element']) \
                     .apply(lambda x: sum(x['Measure_Score'] * x['Measure_Weight']) / sum(x['Measure_Weight'])) \
                     .reset_index(name='Element_Score')
-    df = pd.merge(df, element_scores, on=['Viewpoint', 'Dimension', 'Element'])
+    E = pd.merge(E, element_scores, on=['Element'])
 
     # calculate dimension scores
-    dimension_scores = df.groupby(['Viewpoint', 'Dimension']) \
+    dimension_scores = E.groupby(['Dimension']) \
                         .apply(lambda x: sum(x['Element_Score'] * x['Element_Weight']) / sum(x['Element_Weight'])) \
                         .reset_index(name='Dimension_Score')
-    df = pd.merge(df, dimension_scores, on=['Viewpoint', 'Dimension'])
+    D = pd.merge(D, dimension_scores, on=['Dimension'])
     # calculate viewpoint scores
-    viewpoint_scores = df.groupby(['Viewpoint']) \
+    viewpoint_scores = D.groupby(['Viewpoint']) \
                         .apply(lambda x: sum(x['Dimension_Score'] * x['Dimension_Weight']) / sum(x['Dimension_Weight'])) \
                         .reset_index(name='Viewpoint_Score')
-    df = pd.merge(df, viewpoint_scores, on=['Viewpoint'])
+    VP = pd.merge(VP, viewpoint_scores, on=['Viewpoint'])
 
-    return df
+    return M,E,D,VP
