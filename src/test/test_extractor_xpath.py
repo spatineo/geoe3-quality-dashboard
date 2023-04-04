@@ -38,7 +38,7 @@ def test__extract_publication_date__text():
 
 from loader import load_API
 
-def test__extract_data_api_services():
+def test__extract_data_api_services(private_access_key):
     # Create URL with requested service Id
     # list of service Id :   39859,164572,157386,88383,157353
 
@@ -47,15 +47,15 @@ def test__extract_data_api_services():
     }
 
     test_rule = {
-        'extractionRule': {
-            'source': "API",
-            'type': "dot-notation",
-            'serviceId': "39859",
-            'url_start': "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
-            'rule': "['services'][0]['serviceInfo']['type']",
-            'value': "text"
-        }
+    'extractionRule': {
+        'source': "API",
+        'type': "dot-notation",
+        'serviceId': "39859",
+        "url_start": f"https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
+        'rule': "['services'][0]['serviceInfo']['type']",
+        'value': "text"
     }
+}
 
     result = extract_rule(test_rule['extractionRule'], test_model)
 

@@ -122,7 +122,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//daysOfAvailabilityMetrics",
                                         "value": "text"                                        
                                     },
@@ -139,7 +139,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//daysOfResponseTimeMetrics",
                                         "value": "text"                                        
                                     },
@@ -156,7 +156,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//serviceId",
                                         "value": "text"                                        
                                     },
@@ -173,7 +173,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//availability//total//ok",
                                         "value": "text"                                        
                                     },
@@ -190,7 +190,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//availability//total//down",
                                         "value": "text"                                        
                                     },
@@ -207,7 +207,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//availability//total//maintenance",
                                         "value": "text"                                        
                                     },
@@ -224,7 +224,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "(//services//availability//total//ok + //services//availability//total//maintenance) div (//services//availability//total//ok + //services//availability//total//maintenance + //services//availability//total//down)",
                                         "value": "text"                                        
                                     },
@@ -243,7 +243,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//interruptions//longest",
                                         "value": "text"                                        
                                     },
@@ -262,7 +262,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//interruptions//average",
                                         "value": "text"                                        
                                     },
@@ -281,7 +281,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//responseTime//averageMillis",
                                         "value": "text"                                        
                                     },
@@ -300,7 +300,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//responseTime//latest//at",
                                         "value": "text"                                        
                                     },
@@ -317,7 +317,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//responseTime//latest//millis",
                                         "value": "text"                                        
                                     },
@@ -336,7 +336,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//serviceInfo//url",
                                         "value": "text"                                        
                                     },
@@ -353,7 +353,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//serviceInfo//type",
                                         "value": "text"                                        
                                     },
@@ -370,7 +370,7 @@
                                     "extractionRule": {
                                         "type": "xpath",
                                         "source": "service-availability",
-                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey=RoYjl8a3NbJ3tx1Hh0-IK6iP55i3YnAhSpcWcD2xgwSE8jBBP0EA9Q&serviceIds=",
+                                        "url_start": "https://beta.spatineo-devops.com/api/public/geoe3-dashboard?privateAccessKey={private_access_key}&serviceIds=",
                                         "rule": "//services//serviceInfo//version",
                                         "value": "text"                                        
                                     },

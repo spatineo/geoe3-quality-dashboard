@@ -13,12 +13,16 @@ from evaluate import evaluate, evaluate_categories
 
 
 
-def read_rules_from_json(json_file):
+def read_rules_from_json(json_file, private_access_key):
     try:
         with open(json_file, "r") as f:
             structure_file = json.load(f)
+            
+        # Update the 'url_start' value with the provided 'privateAccessKey'
+        structure_file["extractionRule"]["url_start"] = structure_file["extractionRule"]["url_start"].format(private_access_key=private_access_key)
     except json.JSONDecodeError as e:
         print(f"Error in {json_file} at line {e.lineno}, column {e.colno}: {e.msg}")
+        
     return structure_file
 
 def execute_load_API(rule,serviceId):
@@ -215,6 +219,9 @@ if __name__ == "__main__":
     qualityEvaluation_file = 'C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/src/buildings_and_errors/results_NO_cc.csv'
     serviceId = input("Please enter the service ID (list of service Id : 39859,164572,157386,88383,157353) :")
     interoperability_file = 'C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/src/interoperability_maturityModel.csv'
+
+
+
 
     # Read the JSON file structuring the dashboard
     structure_file = read_rules_from_json("C:/Users/CCOSSEC/Work Folders/Evaluator configuration/geoe3-quality-dashboard/geoe3-quality-dashboard/Dashboard_structure.json")
