@@ -26,6 +26,9 @@
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+from dateutil.relativedelta import relativedelta
+from dateutil.parser import parse
+
 
 # Evaluate presence of a value : 0 if not / 5 if yes
 def evaluate_presence(rule, value, min,max):
@@ -197,15 +200,26 @@ def evaluate_maintenance(rule, maintenance_date, frequency_code, tt):
         return 0
 
 
-def evaluate(rule,value,min,max):
+def evaluate(rule, value, min, max, evaluator_by_type):
     if value is None or value == '':
-        return 0 # the value is missing, assign the minimum score
-    else :
-        evaluator = evaluator_by_type[rule['type']]
+        return 0  # the value is missing, assign the minimum score
+    else:
+        evaluator = evaluator_by_type.get(rule['type'])
         if evaluator is None:
-            raise f"Unknown rule evaluator type {rule['type']}"
-        return evaluator(rule,value,min,max)
+            raise ValueError(f"Unknown rule evaluator type {rule['type']}")
+        return evaluator(rule, value, min, max)
 
+
+def evaluate_date_not_older_than(rule, value, context, max_value):
+    date_value = parse(value)
+    now = context['now']
+    duration = rule['duration']
+    delta = relativedelta(months=int(duration[1:-1]))
+
+    if now - delta <= date_value:
+        return max_value, f"date {value} not older than {duration}"
+    else:
+        return 0, f"date {value} older than {duration}"
 
 
 evaluator_by_type = {
@@ -214,7 +228,8 @@ evaluator_by_type = {
     'comparison': evaluate_comparison,
     'comparisonDependent': evaluate_comparisonDependent,
     'range': evaluate_range,
-    'maintenance': evaluate_maintenance
+    'maintenance': evaluate_maintenance,
+    'date-not-older-than': evaluate_date_not_older_than
 }
 
 # Score each category of quality element
