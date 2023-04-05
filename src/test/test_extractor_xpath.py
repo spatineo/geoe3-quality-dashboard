@@ -3,20 +3,20 @@ import sys
 from pathlib import Path
 from src.extract import extract_rule
 from src.loader import load_dataset_metadata, load_API
+import platform
 
-# Get the absolute path of the current file
+def clear_console():
+    if platform.system().lower() == "windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
 current_file_path = os.path.abspath(__file__)
-
-# Change the working directory to the location of the current file
 os.chdir(os.path.dirname(current_file_path))
-
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-
-# Clear the console
-os.system("cls")
+clear_console()
 
 spatineo_api_access_key = os.environ.get("SPATINEO_API_ACCESS_KEY")
-
 
 def test__extract_publication_date__text():
     """Test that this xpath extractor with value function ***text*** works"""
@@ -38,7 +38,7 @@ def test__extract_publication_date__text():
     return result
 
 
-def test__extract_data_api_services(spatineo_api_access_key):
+def test__extract_data_api_services():
     test_model = {"dataset-API": load_dataset_metadata("test_MD_Bui_EX_1.xml")}
 
     test_rule = {
@@ -58,15 +58,22 @@ def test__extract_data_api_services(spatineo_api_access_key):
     url = test_rule["extractionRule"]["url_start"] + service_id
 
     api_data, _ = load_API(url, service_id)
-    field_value = api_data['services'][0]['serviceInfo']['type']
+    
+    services = api_data.get('services', [])
+    if services:
+        service_info = services[0].get('serviceInfo', {})
+        field_value = service_info.get('type', 'Key not found')
+    else:
+        field_value = 'Key not found'
 
     print(f"Value extracted via extraction rule: {field_value}")
 
     return field_value
 
 
-# result = test__extract_publication_date__text()
-# print(result)
+if __name__ == "__main__":
+    # result = test__extract_publication_date__text()
+    # print(result)
 
-field_value = test__extract_data_api_services(spatineo_api_access_key)
-print(field_value)
+    field_value = test__extract_data_api_services()
+    print(field_value)
