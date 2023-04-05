@@ -3,7 +3,7 @@
 from datetime import datetime
 
 from src.extract import extract_rule
-from src.evaluate import evaluate_results
+from src.evaluate import evaluate
 from src.loader import load_dataset_metadata
 
 # Documentation: https://docs.python.org/3/library/xml.etree.elementtree.html#xpath-support
@@ -54,5 +54,5 @@ test_context = {
 result = extract_rule(test_rule['extractionRule'], test_model)
 print(f"value extracted via extraction rule: {result}")
 
-value = evaluate_results(test_rule['evaluationCriteria'], result, test_context)
+value = evaluate(test_rule['evaluationCriteria'], result, test_context)
 print(f"evaluated value: {value}")

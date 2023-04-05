@@ -1,6 +1,6 @@
 """This module contains functions to load input data into the model"""
-from xml_ import *
-from xml_ import ns
+from src.xml_ import *
+from src.xml_ import ns
 from lxml import etree as ET
 import os
 import urllib.request
@@ -53,7 +53,6 @@ def load_API(url, serviceId):
             tmp_file.write(xml_data.encode())
             dom = xml.dom.minidom.parseString(xml_data)
             pretty_tmp_file = dom.toprettyxml()
-            
 
         # Move the file to your desired directory
         program_dir = os.path.dirname(os.path.abspath(__file__))
@@ -62,12 +61,13 @@ def load_API(url, serviceId):
         now_str = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
         new_filename = os.path.join(temp_dir, f'temp{now_str}.xml')
         shutil.move(tmp_filename, new_filename)
-    return new_filename
 
-def load_cvs(cvs_file):
-    with open(cvs_file, newline='',encoding='utf-8-sig') as csvfile:
-        reader = csv.reader(csvfile,delimiter=',')
+    return json_data, new_filename
+
+
+def load_csv(csv_file):
+    with open(csv_file, newline='', encoding='utf-8-sig') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
         rows = [row for row in reader]
-    # split each row into a list of values
-    rows = [row[0].split(',') for row in rows]
     return rows
+
